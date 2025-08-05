@@ -245,6 +245,24 @@ const items = [
 
 
 function ProjectsSection() {
+
+  const [radius, setRadius] = useState(250);
+
+  useEffect(() => {
+    // Runs only on the client
+    const updateRadius = () => {
+      const width = window.innerWidth;
+      setRadius(width < 640 ? 120 : 250);
+    };
+
+    updateRadius(); // Set on initial render
+    window.addEventListener("resize", updateRadius); // Optional: respond to resize
+
+    return () => window.removeEventListener("resize", updateRadius);
+  }, []);
+
+
+  
   return (
     <section
       id="projects"
@@ -255,11 +273,10 @@ function ProjectsSection() {
     >
       <AnimatedHeading text="Projects" />
 
-      {/* Responsive container - No fixed height */}
       <div className="relative w-full max-w-7xl mx-auto min-h-[400px] sm:min-h-[600px] lg:min-h-[700px]">
         <ChromaGrid
           items={items}
-          radius={window.innerWidth < 640 ? 120 : 250}
+          radius={radius}
           damping={0.45}
           fadeOut={0.6}
           ease="power3.out"
