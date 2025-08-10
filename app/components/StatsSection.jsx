@@ -1,54 +1,3 @@
-// "use client";
-
-// import React, {useState, useEffect} from "react";
-// import localFont from "next/font/local";
-// import AnimatedHeading from "./AnimatedHeading";
-
-// const funnelSans = localFont({
-//   src: [
-//     {
-//       path: "../fonts/funnel-sans/FunnelSans-Bold.ttf",
-//       weight: "700",
-//       style: "normal",
-//     },
-//   ],
-//   variable: "--font-funnel-sans",
-//   display: "swap",
-// });
-
-// export function StatsSection() {
-//   const stats = [
-//     { value: "5+", label: "Projects Completed" },
-//     { value: "2", label: "Years Experience" },
-//     { value: "3+", label: "Hackathons Participation" },
-//     { value: "∞", label: "Cups of Coffee" }
-//   ];
-
-//   return (
-//     <section className={`${funnelSans.className} mt-12 text-center 
-//         bg-gradient-to-br from-blue-300 via-purple-100 to-pink-300
-//         dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 
-//         py-20 px-4 sm:px-6 rounded-xl shadow-xl`}>
-//       <div className="container mx-auto px-6 py-5">
-//         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-//           {stats.map((stat, index) => (
-//             <div key={index} className="p-6 duration-300
-//                 backdrop-blur-lg shadow-lg
-//                 border border-white/20
-//                 bg-white/30 text-gray-800
-//                 dark:bg-white/5 dark:text-gray-200 dark:border-white/10
-//                 hover:shadow-2xl hover:scale-105 rounded-lg">
-//               <div className="text-4xl font-bold mb-2">{stat.value}</div>
-//               <div className="text-xl">{stat.label}</div>
-//             </div>
-//           ))}
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-
-
 
 "use client";
 
@@ -69,12 +18,13 @@ const funnelSans = localFont({
 });
 
 export function StatsSection() {
-  const stats = [
-    { value: "5+", label: "Projects Completed" },
-    { value: "2", label: "Years Experience" },
-    { value: "3+", label: "Hackathons Participation" },
-    { value: "∞", label: "Cups of Coffee" }
-  ];
+const stats = [
+  { value: "5+", label: "Built Projects" },
+  { value: "2", label: "Dev Journey" },
+  { value: "3+", label: "Code Battles" },
+  { value: "∞", label: "Fuel Consumed" }
+];
+
 
   // Bubble configurations
   const [bubbles, setBubbles] = useState([]);
@@ -240,7 +190,10 @@ export function StatsSection() {
                 >
                   {stat.value}
                 </motion.div>
-                <p className="text-xl font-medium text-gray-800 dark:text-gray-200">{stat.label}</p>
+                <p className="text-sm sm:text-base md:text-xl font-medium text-center text-gray-800 dark:text-gray-200 break-words leading-snug">
+  {stat.label}
+</p>
+
               </div>
               
               {/* Animated progress bar */}
