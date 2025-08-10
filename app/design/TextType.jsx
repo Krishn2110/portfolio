@@ -31,6 +31,8 @@ const TextType = ({
   const [isVisible, setIsVisible] = useState(!startOnVisible);
   const cursorRef = useRef(null);
   const containerRef = useRef(null);
+  const [currentTextColor, setCurrentTextColor] = useState("#693382");
+
 
   const textArray = Array.isArray(text) ? text : [text];
 
@@ -40,10 +42,32 @@ const TextType = ({
     return Math.random() * (max - min) + min;
   };
 
-  const getCurrentTextColor = () => {
-    if (textColors.length === 0) return "#ffffff";
-    return textColors[currentTextIndex % textColors.length];
-  };
+  // const getCurrentTextColor = () => {
+  //   if (textColors.length === 0) return "#693382";
+  //   return textColors[currentTextIndex % textColors.length];
+  // };
+
+  useEffect(() => {
+  let color = "#693382"; // default fallback
+
+  if (typeof document !== "undefined") {
+    const isDarkMode = document.documentElement.classList.contains("dark");
+    color = isDarkMode
+      ? "#ffffff"
+      : textColors.length
+      ? textColors[currentTextIndex % textColors.length]
+      : "#693382";
+  }
+
+  setCurrentTextColor(color);
+}, [textColors, currentTextIndex]);
+
+
+//   const getCurrentTextColor = () => {
+//   const isDarkMode = document.documentElement.classList.contains('dark');
+//   return isDarkMode ? "#ffffff" : 
+//          textColors.length ? textColors[currentTextIndex % textColors.length] : "#693382";
+// };
 
   useEffect(() => {
     if (!startOnVisible || !containerRef.current) return;
@@ -161,7 +185,8 @@ const TextType = ({
       className: `inline-block whitespace-pre-wrap tracking-tight ${className}`,
       ...props,
     },
-    <span className="inline" style={{ color: getCurrentTextColor() }}>
+    <span className="inline" style={{ color: currentTextColor }}>
+
       {displayedText}
     </span>,
     showCursor && (

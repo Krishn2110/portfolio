@@ -1,586 +1,3 @@
-// "use client";
-// import { motion,  useAnimation } from "framer-motion";
-// import Image from "next/image";
-// import Link from "next/link";
-// import Navbar from "./components/Navbar";
-// import { useEffect, useState , useRef} from "react";
-// import Head from "next/head";
-// import localFont from "next/font/local";
-// import { FaGithub, FaExternalLinkAlt,  FaEnvelope, FaLinkedin } from "react-icons/fa";
-// import { useInView } from "react-intersection-observer";
-// import { Mail, Github, Linkedin,  ArrowUp } from "lucide-react";
-
-
-// const funnelSans = localFont({
-//   src: [
-//     // {
-//     //   path: "fonts/funnel-sans/FunnelSans-SemiBold.ttf",
-//     //   weight: "700",
-//     //   style: "normal",
-//     // },
-//     {
-//       path: "fonts/funnel-sans/FunnelSans-Bold.ttf",
-//       weight: "700",
-//       style: "normal",
-//     },
-//   ],
-//   variable: "--font-funnel-sans",
-//   display: "swap",
-// });
-
-
-// function AnimatedHeading({ text }) {
-//   const controls = useAnimation();
-//   const [ref, inView] = useInView({
-//     triggerOnce: true, 
-//     threshold: 0.4,    
-//   });
-
-//   useEffect(() => {
-//     if (inView) controls.start("visible");
-//   }, [inView, controls]);
-
-//   const letterVariants = {
-//     hiddenLeft: { x: -40, opacity: 0 },
-//     hiddenRight: { x: 40, opacity: 0 },
-//     visible: { x: 0, opacity: 1, transition: { duration: 0.4 } },
-//   };
-
-//   return (
-//     <h2 ref={ref} className="text-5xl font-bold mb-6 flex justify-center space-x-1">
-//       {text.split("").map((char, index) => (
-//         <motion.span
-//           key={index}
-//           initial={index % 2 === 0 ? "hiddenLeft" : "hiddenRight"}
-//           animate={controls}
-//           variants={letterVariants}
-//         >
-//           {char}
-//         </motion.span>
-//       ))}
-//     </h2>
-//   );
-// }
-
-
-// const certificates = [
-//   {
-//     title: "Data Science",
-//     file: "Datascience.pdf",
-//     desc: "Completed comprehensive course on data science tools & techniques.",
-//   },
-//   {
-//     title: "NASA Space Apps Challenge",
-//     file: "NASA Space Apps Challenge.pdf",
-//     desc: "Participated in global hackathon focused on space tech innovation.",
-//   },
-//   {
-//     title: "Python",
-//     file: "pycertificate1.pdf",
-//     desc: "Learned Python basics, functions, OOP, and automation.",
-//   },
-//   {
-//     title: "Frontend Internship",
-//     file: "Kislay Rai.pdf",
-//     desc: "Completed internship on modern frontend technologies (React, Tailwind).",
-//   },
-//   {
-//     title: "Javascript",
-//     file: "Javascript.pdf",
-//     desc: "Mastered core JavaScript, DOM manipulation, and ES6+ features.",
-//   },
-//   {
-//     title: "HTML",
-//     file: "HTML.pdf",
-//     desc: "Certified in HTML5 for semantic and accessible web development.",
-//   },
-//   {
-//     title: "DSA",
-//     file: "gfg_dsa.pdf",
-//     desc: "Built strong foundation in Data Structures & Algorithms (GFG).",
-//   },
-//   {
-//     title: "CSS",
-//     file: "CSS.pdf",
-//     desc: "Gained skills in modern responsive styling and layout systems.",
-//   },
-// ];
-
-// const projects = [
-//   {
-//     title: "Excel Analytics App",
-//     desc: "Upload Excel files and visualize data with charts.",
-//     image: "/images/excel.png",
-//     github: "https://github.com/krushal29/ZidioFrontendInternship",
-   
-//   },
-//   {
-//     title: "Twitter Clone",
-//     desc: "A Twitter clone built with Tailwind CSS and fully responsive.",
-//     image: "/images/twitter.png",
-//     github: "https://github.com/Krishn2110/twitter",
-//     demo: "#",
-//   },
-//   {
-//     title: "Password Manager",
-//     desc: "A full-stack encrypted password manager with secure login.",
-//     image: "https://via.placeholder.com/400x200?text=Password+Manager",
-//     github: "https://github.com/Krishn2110/Password_manager",
-//     demo: "#",
-//   },
-//   {
-//     title: "Travel Booking Website",
-//     desc: "Search and book travel services with secure payments via Razorpay.",
-//     image: "https://via.placeholder.com/400x200?text=Travel+Booking+Site",
-//     github: "https://github.com/Krishn2110/TravelBooking",
-//     demo: "#",
-//   },
-//   {
-//     title: "Calculator",
-//     desc: "A basic calculator built using HTML, CSS, and JavaScript.",
-//     image: "https://via.placeholder.com/400x200?text=Calculator",
-//     github: "https://github.com/Krishn2110/Calculator",
-//     demo: "#",
-//   },
-//   {
-//     title: "Music Player",
-//     desc: "A responsive music player with custom UI built with vanilla JS.",
-//     image: "https://via.placeholder.com/400x200?text=Music+Player",
-//     github: "https://github.com/Krishn2110/music-player",
-//     demo: "#",
-//   },
-// ];
-
-// const contactIcons = [
-//   {
-//     href: "mailto:raikislay1@gmail.com",
-//     icon: <FaGithub />,
-//     title: "Email",
-//     iconComponent: <FaGithub />,
-//   },
-//   {
-//     href: "https://github.com/yourusername",
-//     iconComponent: <FaGithub />,
-//     title: "GitHub",
-//   },
-//   {
-//     href: "https://linkedin.com/in/yourprofile",
-//     iconComponent: <FaExternalLinkAlt />,
-//     title: "LinkedIn",
-//   },
-// ];
-
-
-// // Animation variants for scroll-based animation
-// const getCardVariant = (i) => ({
-//   hidden: { opacity: 0, y: 40 },
-//   visible: { opacity: 1, y: 0 },
-// });
-
-
-// export default function Home() {
-
-//    const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 });
-
-//   useEffect(() => {
-//     const move = (e) => {
-//       setCursorPos({ x: e.clientX, y: e.clientY });
-//     };
-//     window.addEventListener("mousemove", move);
-//     return () => window.removeEventListener("mousemove", move);
-//   }, []);
-
-//   const [showTopBtn, setShowTopBtn] = useState(false);
-
-// useEffect(() => {
-//   const handleScroll = () => {
-//     setShowTopBtn(window.scrollY > 300);
-//   };
-//   window.addEventListener("scroll", handleScroll);
-//   return () => window.removeEventListener("scroll", handleScroll);
-// }, []);
-
-// // Add at the top of your component
-// const hoverAudio = useRef(null);
-
-// useEffect(() => {
-//   hoverAudio.current = new Audio("/sounds/hover.mp3");
-// }, []);
-
-
-
-//   return (
-//     <main className="min-h-screen  font-sans px-6 pt-20 pb-10  text-gray-900 dark:text-white bg-gradient-to-br from-blue-200 via-purple-200 to-pink-200 dark:from-gray-900 dark:via-gray-800 dark:to-black transition-colors duration-300">
-//       <Navbar/>
-
-//     <section className={`${funnelSans.className} relative overflow-hidden min-h-screen flex flex-col-reverse md:flex-row items-center rounded-2xl justify-around px-6 md:px-20 py-20 bg-gradient-to-r from-blue-900 via-purple-900 to-pink-900 text-white`}>
-
-//   {/* Background & cursor-following bubbles remain same */}
-//   <motion.div className="absolute w-96 h-96 bg-pink-300 rounded-full opacity-20 blur-3xl top-[-10%] left-[-10%] z-0"
-//     animate={{ x: [0, 30, -30, 0], y: [0, -20, 20, 0] }}
-//     transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-//   />
-//   <motion.div className="absolute w-72 h-72 bg-blue-300 rounded-full opacity-20 blur-3xl bottom-[-10%] right-[-10%] z-0"
-//     animate={{ x: [0, -30, 30, 0], y: [0, 20, -20, 0] }}
-//     transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-//   />
-//   <motion.div className="absolute w-60 h-60 bg-purple-300 rounded-full opacity-20 blur-3xl top-[20%] right-[10%] z-0"
-//     animate={{ x: [0, 25, -25, 0], y: [0, 15, -15, 0] }}
-//     transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-//   />
-//   <motion.div
-//     className="pointer-events-none absolute w-40 h-40 rounded-full bg-white/10 blur-2xl z-0"
-//     style={{
-//       top: cursorPos.y - 80,
-//       left: cursorPos.x - 80,
-//     }}
-//     animate={{ x: 0, y: 0 }}
-//     transition={{ type: "spring", damping: 20, stiffness: 100 }}
-//   />
-
-  
-
-//  <motion.div
-//   initial={{ opacity: 0, scale: 0 }}
-//   animate={{
-//     opacity: 1,
-//     scale: [0, 1.4, 0.9, 1.1, 1],
-//   }}
-//   transition={{
-//     duration: 1.6,
-//     ease: "easeOut",
-//     times: [0, 0.4, 0.6, 0.8, 1],
-//   }}
-//   className="group relative w-72 h-72 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white shadow-lg transition-all duration-500 hover:shadow-[0_0_30px_10px_rgba(255,255,255,0.4)]"
-// >
-//   <Image
-//     src="/profile.jpg"
-//     alt="Kislay Rai"
-//     layout="fill"
-//     objectFit="cover"
-//     className="rounded-full transition-transform duration-500 group-hover:scale-105"
-//     priority
-//   />
-// </motion.div>
-
-
-//   {/* Text Content on Right */}
-//   <motion.div
-//     initial={{ opacity: 0, x: 50 }}
-//     animate={{ opacity: 1, x: 0 }}
-//     transition={{ duration: 1, ease: "easeOut" }}
-//     className="relative z-10 w-full md:w-1/2 space-y-6"
-//   >
-//     <h1 className="text-5xl font-extrabold leading-tight">
-//       Hello! I'm{" "}
-//       <motion.span
-//         initial={{ opacity: 0 }}
-//         animate={{ opacity: 1 }}
-//         transition={{ delay: 1, duration: 1 }}
-//         className="bg-white text-purple-600 px-2 py-1 rounded shadow-xl inline-block"
-//       >
-//         Kislay Rai
-//       </motion.span>
-//       .<br />
-//       A Full-Stack Developer & ML Enthusiast.
-//     </h1>
-//     <motion.p
-//       initial={{ opacity: 0, y: 20 }}
-//       animate={{ opacity: 1, y: 0 }}
-//       transition={{ delay: 1.2, duration: 1 }}
-//       className="text-lg text-white/80"
-//     >
-//       Crafting immersive web experiences with modern tools & elegant design.
-//     </motion.p>
-//     <motion.a
-//       initial={{ opacity: 0, scale: 0.9 }}
-//       animate={{ opacity: 1, scale: 1 }}
-//       transition={{ delay: 1.4, duration: 0.8 }}
-//       href="/cv.pdf"
-//       download
-//       className="inline-block mt-4 bg-white text-pink-600 font-semibold px-6 py-3 rounded-full hover:bg-pink-100 transition hover:scale-105"
-//     >
-//       Download Resume
-//     </motion.a>
-//   </motion.div>
-// </section>
-
-
-// <section
-//   id="skills"
-//   className={`${funnelSans.className} mt-28 text-center bg-gradient-to-br from-green-100 via-blue-200 to-purple-100 dark:from-gray-900 dark:via-gray-800 dark:to-black py-20 px-6 rounded-xl shadow-xl`}
-// >
-//   <AnimatedHeading text="Skills" />
-
-//   <div className="max-w-5xl mx-auto grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 mt-12 text-gray-800 dark:text-gray-200">
-//     {[
-//       "HTML5",
-//       "CSS3",
-//       "JavaScript",
-//       "React.js",
-//       "Next.js",
-//       "Tailwind CSS",
-//       "Node.js",
-//       "Express.js",
-//       "MongoDB",
-//       "Python",
-//       "Git & GitHub",
-//       "C++"
-//     ].map((skill, i) => (
-//       <motion.div
-//         key={i}
-//         className="bg-white/10 dark:bg-white/5 p-4 rounded-lg shadow-lg hover:shadow-xl transition-transform transform hover:-translate-y-1"
-//         initial={{ opacity: 0, y: 20 }}
-//         whileInView={{ opacity: 1, y: 0 }}
-//         viewport={{ once: true, amount: 0.3 }}
-//         transition={{ duration: 0.4, delay: i * 0.05 }}
-//       >
-//         <p className="font-semibold">{skill}</p>
-//       </motion.div>
-//     ))}
-//   </div>
-// </section>
-
-
-//  <section
-//       id="certificates"
-//       className={`${funnelSans.className} mt-28 text-center bg-gradient-to-br from-yellow-100 via-orange-200 to-rose-100 dark:from-gray-900 dark:via-gray-800 dark:to-black py-20 px-6 rounded-xl shadow-xl`}
-//     >
-//       <AnimatedHeading text="Certificates" />
-      
-
-//       <div className="grid grid-cols-1 sm:grid-cols-2 mt-15 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-//         {certificates.map((cert, i) => {
-//           const imagePreview = `/certificates/previews/${cert.file.replace(".pdf", ".png")}`;
-
-//           return (
-//             <div className="relative group" key={i}>
-//               {/* Background glowing blur layer */}
-//               <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-pink-400 via-purple-400 to-blue-400 opacity-20 blur-xl group-hover:opacity-50 transition duration-500 pointer-events-none" />
-
-//               {/* Certificate card */}
-//               <motion.a
-//                 href={`/certificates/${cert.file}`}
-//                 target="_blank"
-//                 rel="noopener noreferrer"
-//                 variants={getCardVariant(i)}
-//                 initial="hidden"
-//                 whileInView="visible"
-//                 viewport={{ once: true, amount: 0.2 }}
-//                 transition={{ duration: 0.6, delay: i * 0.1 }}
-//                 className="relative block rounded-2xl p-4 bg-white/10 backdrop-blur-xl border border-white/10 shadow-xl hover:shadow-[0_0_20px_4px_rgba(255,255,255,0.4)] hover:scale-[1.03] hover:ring-2 hover:ring-pink-300/60 transition-all duration-300 text-left"
-//               >
-//                 <div className="relative h-[220px] bg-purple-100 dark:bg-gray-800 rounded-xl overflow-hidden flex items-center justify-center">
-//                   {/* Image preview on hover */}
-//                   <Image
-//                     src={imagePreview}
-//                     alt={`Preview of ${cert.title}`}
-//                     width={400}
-//                     height={220}
-//                     className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-//                   />
-
-//                   {/* Text fallback */}
-//                   <div className="z-10 group-hover:opacity-0 transition-opacity duration-300 text-left p-4">
-//                     <h3 className="font-semibold text-black dark:text-white text-xl text-center mb-2">
-//                       {cert.title}
-//                     </h3>
-//                     <p className="text-gray-700 dark:text-gray-300 text-sm text-center">{cert.desc}</p>
-//                     {/* <p className="text-sm text-purple-700 dark:text-purple-300 underline text-center mt-2">
-//                       View Certificate
-//                     </p> */}
-//                   </div>
-//                 </div>
-//               </motion.a>
-//             </div>
-//           );
-//         })}
-//       </div>
-//     </section>
-
-
-//       <section
-//       id="projects"
-//       className={`${funnelSans.className} mt-28 text-center bg-gradient-to-r from-green-100 via-teal-200 to-blue-100 bg-[length:300%_300%] animate-gradient-xy dark:from-gray-800 dark:via-gray-900 dark:to-black py-20 px-6 rounded-xl`}
-//     >
-//       <AnimatedHeading text="Projects"/>
-     
-
-//       <div className="grid grid-cols-1 md:grid-cols-2 mt-15 gap-8 max-w-5xl mx-auto">
-//         {projects.map((project, i) => (
-//           <motion.div
-//   key={i}
-//   className="relative group overflow-hidden shadow-3xl rounded-2xl"
-//   initial={{ opacity: 0, y: 30 }}
-//   whileInView={{ opacity: 1, y: 0 }}
-//   viewport={{ once: true, amount: 0.2 }}
-//   transition={{ duration: 0.6, delay: i * 0.1 }}
-//   whileHover={{ scale: 1.02 }}
-// >
-
-//             <img
-//               src={project.image}
-//               alt={project.title}
-//               className="w-full h-60 object-cover"
-//             />
-//             <div className="p-4 text-left bg-white dark:bg-black/80 backdrop-blur">
-//               <h3 className="text-xl font-semibold">{project.title}</h3>
-//               <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">{project.desc}</p>
-//             </div>
-//             {/* Hover Icons */}
-//             <div className="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center gap-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-//               <a
-//                 href={project.github}
-//                 target="_blank"
-//                 rel="noopener noreferrer"
-//                 className="text-white text-5xl hover:text-gray-300"
-//                 title="GitHub"
-//               >
-//                 <FaGithub />
-//               </a>
-            
-              
-//             </div>
-//           </motion.div>
-//         ))}
-//       </div>
-//     </section>
-  
-
-// <section
-//   id="contact"
-//   className={`${funnelSans.className} mt-28 text-center bg-gradient-to-tr from-pink-100 via-purple-100 to-blue-100 bg-[length:250%_250%] animate-gradient-y dark:from-gray-800 dark:via-gray-900 dark:to-black py-20 px-6 rounded-xl`}
-// >
-//   <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">Get in Touch</h2>
-
-  
-
-//   {/* Contact Form */}
-//   <form
-//     action="https://formspree.io/f/xnnvwwgp" // ← Replace with your Formspree or backend handler
-//     method="POST"
-//     className="max-w-xl mx-auto bg-white dark:bg-gray-900 p-8 rounded-xl shadow-md space-y-6"
-//   >
-//     <input
-//       type="text"
-//       name="name"
-//       placeholder="Your Name"
-//       required
-//       className="w-full px-4 py-3 rounded-md border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-//     />
-
-//     <input
-//       type="email"
-//       name="email"
-//       placeholder="Your Email"
-//       required
-//       className="w-full px-4 py-3 rounded-md border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-//     />
-
-//     <textarea
-//       name="message"
-//       rows={5}
-//       placeholder="Your Message"
-//       required
-//       className="w-full px-4 py-3 rounded-md border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-//     />
-
-//     <button
-//       type="submit"
-//       className="w-full bg-[#831347] cursor-pointer hover:scale-103 duration-300  text-white py-3 rounded-md font-medium transition"
-//     >
-//       Send Message
-//     </button>
-//   </form>
-// </section>
-
-
-
-
-// <motion.div
-//   className="fixed top-1/2 right-4 transform -translate-y-1/2 z-50 flex flex-col gap-4"
-//   initial={{ x: 100, opacity: 0 }}
-//   animate={{ x: 0, opacity: 1 }}
-//   transition={{ duration: 0.8, ease: "easeOut" }}
-// >
-//   {[
-//     {
-//       href: "mailto:raikislay1@gmail.com",
-//       icon: <FaEnvelope className="w-5 h-5" />,
-//       label: "Email",
-//       color: "text-red-600",
-//     },
-//     {
-//       href: "https://github.com/Krishn2110",
-//       icon: <FaGithub className="w-5 h-5" />,
-//       label: "GitHub",
-//       color: "text-gray-800 dark:text-white",
-//     },
-//     {
-//       href: "https://www.linkedin.com/in/kislay-rai-a84834290",
-//       icon: <FaLinkedin className="w-5 h-5" />,
-//       label: "LinkedIn",
-//       color: "text-blue-700 dark:text-blue-400",
-//     },
-//   ].map((item, index) => (
-//     <a
-//       key={index}
-//       href={item.href}
-//       target="_blank"
-//       rel="noopener noreferrer"
-//       className="group relative flex items-center"
-//       title={item.label}
-//       // onMouseEnter={() => hoverAudio.current && hoverAudio.current.play()}
-//       onMouseEnter={() => {
-//   if (hoverAudio.current) {
-//     hoverAudio.current.currentTime = 0; // rewind to start
-//     hoverAudio.current.play();
-//   }
-// }}
-
-//     >
-//       {/* Slide-in label */}
-//       <span className="absolute right-full mr-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 translate-x-2 transition-all text-sm font-medium text-white bg-black/80 px-2 py-1 rounded shadow-lg">
-//         {item.label}
-//       </span>
-
-//       {/* Icon with ripple */}
-//       <div className="relative">
-//         {/* Ripple circle */}
-//         <span className="absolute inset-0 w-full h-full rounded-full animate-ping bg-pink-400 opacity-0 group-hover:opacity-30 pointer-events-none z-0 transition" />
-//         <div
-//           className={`relative z-10 bg-white dark:bg-gray-800 ${item.color} p-3 rounded-full shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:bg-opacity-90 hover:translate-x-[-4px]`}
-//         >
-//           {item.icon}
-//         </div>
-//       </div>
-//     </a>
-//   ))}
-// </motion.div>
-
-
-
-
-// {showTopBtn && (
-//   <motion.button
-//     onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-//     className="fixed bottom-6 right-6 z-50 dark:bg-[#831347] text-white p-3 rounded-full shadow-lg  transition-all"
-//     initial={{ opacity: 0, scale: 0 }}
-//     animate={{ opacity: 1, scale: 1 }}
-//     whileHover={{ scale: 1.1 }}
-//     title="Back to Top"
-//   >
-//     <ArrowUp size={20} />
-//   </motion.button>
-// )}
-
-
-
-//     </main>
-//   );
-// }
-
-
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import SkillsSection from "./components/SkillsSection";
@@ -591,6 +8,7 @@ import SocialIconsSidebar from "./components/SocialIconsSidebar";
 import ScrollToTopButton from "./components/ScrollToTopButton";
 import localFont from "next/font/local";
 import DarkModeToggle from "./components/DarkModeToggle";
+import { StatsSection } from "./components/StatsSection";
 
 const funnelSans = localFont({
   src: [{ path: "fonts/funnel-sans/FunnelSans-Bold.ttf", weight: "700", style: "normal" }],
@@ -605,6 +23,7 @@ export default function HomePage() {
       <DarkModeToggle />
       <HeroSection funnelSans={funnelSans} />
       <SkillsSection funnelSans={funnelSans} />
+      <StatsSection funnelSans={funnelSans} />
       <ProjectsSection funnelSans={funnelSans} />
       <CertificatesSection funnelSans={funnelSans} />
       <ContactForm funnelSans={funnelSans} />
@@ -613,3 +32,575 @@ export default function HomePage() {
     </main>
   );
 }
+
+
+
+// "use client";
+// import { useState, useEffect } from "react";
+// import { motion, AnimatePresence } from "framer-motion";
+
+// export default function Portfolio() {
+//   const [activeSection, setActiveSection] = useState("hero");
+//   const [darkMode, setDarkMode] = useState(false);
+
+//   useEffect(() => {
+//     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+//     setDarkMode(prefersDark);
+//   }, []);
+
+//   const toggleDarkMode = () => {
+//     setDarkMode(!darkMode);
+//   };
+
+//   return (
+//     <div className={`min-h-screen transition-colors duration-500 ${darkMode ? 'bg-gray-900 text-white' : 'bg-gradient-to-br from-blue-50 to-purple-50 text-gray-800'}`}>
+//       {/* Navigation */}
+//       <header className="fixed w-full top-0 z-50 backdrop-blur-lg bg-white/80 dark:bg-gray-900/80 border-b border-gray-200 dark:border-gray-800">
+//         <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
+//           <motion.div 
+//             initial={{ opacity: 0, x: -20 }}
+//             animate={{ opacity: 1, x: 0 }}
+//             className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500"
+//           >
+//             Kislay Rai
+//           </motion.div>
+          
+//           <div className="flex items-center space-x-4">
+//             <div className="hidden md:flex space-x-6">
+//               {['hero', 'skills', 'projects', 'about', 'contact'].map((section) => (
+//                 <motion.button
+//                   key={section}
+//                   onClick={() => setActiveSection(section)}
+//                   className={`relative px-1 py-2 capitalize font-medium ${
+//                     activeSection === section 
+//                       ? 'text-blue-600 dark:text-blue-400' 
+//                       : 'text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-300'
+//                   }`}
+//                   whileHover={{ y: -2 }}
+//                 >
+//                   {section}
+//                   {activeSection === section && (
+//                     <motion.div 
+//                       className="absolute bottom-0 left-0 right-0 h-0.5 bg-blue-500 dark:bg-blue-400"
+//                       layoutId="navIndicator"
+//                     />
+//                   )}
+//                 </motion.button>
+//               ))}
+//             </div>
+            
+//             <motion.button
+//               onClick={toggleDarkMode}
+//               className="p-2 rounded-full bg-gray-200 dark:bg-gray-700"
+//               whileHover={{ rotate: 15 }}
+//               whileTap={{ scale: 0.9 }}
+//             >
+//               {darkMode ? (
+//                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+//                   <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+//                 </svg>
+//               ) : (
+//                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+//                   <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+//                 </svg>
+//               )}
+//             </motion.button>
+//           </div>
+//         </nav>
+//       </header>
+
+//       <main className="pt-20">
+//         {/* Hero Section */}
+//         <AnimatePresence mode="wait">
+//           {activeSection === "hero" && (
+//             <motion.section 
+//               key="hero"
+//               initial={{ opacity: 0, y: 20 }}
+//               animate={{ opacity: 1, y: 0 }}
+//               exit={{ opacity: 0, y: -20 }}
+//               transition={{ duration: 0.5 }}
+//               className="min-h-screen flex flex-col md:flex-row items-center justify-center px-6 py-20"
+//             >
+//               <div className="w-full md:w-1/2 flex justify-center mb-10 md:mb-0">
+//                 <div className="relative">
+//                   <div className="w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 overflow-hidden border-4 border-white dark:border-gray-800 shadow-2xl">
+//                     <div className="w-full h-full bg-gray-200 border-2 border-dashed rounded-full" />
+//                   </div>
+//                   <div className="absolute -bottom-4 -right-4 bg-white dark:bg-gray-800 px-4 py-2 rounded-full shadow-lg">
+//                     <span className="font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+//                       Full Stack Developer
+//                     </span>
+//                   </div>
+//                 </div>
+//               </div>
+              
+//               <div className="w-full md:w-1/2">
+//                 <motion.h1 
+//                   className="text-4xl md:text-6xl font-bold mb-6"
+//                   initial={{ opacity: 0 }}
+//                   animate={{ opacity: 1 }}
+//                   transition={{ delay: 0.2 }}
+//                 >
+//                   Hi, I'm <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">Kislay Rai</span>
+//                 </motion.h1>
+                
+//                 <motion.p 
+//                   className="text-xl md:text-2xl mb-8 text-gray-600 dark:text-gray-300"
+//                   initial={{ opacity: 0 }}
+//                   animate={{ opacity: 1 }}
+//                   transition={{ delay: 0.4 }}
+//                 >
+//                   Crafting immersive web experiences with modern tools & elegant design.
+//                 </motion.p>
+                
+//                 <motion.div 
+//                   className="flex flex-wrap gap-4"
+//                   initial={{ opacity: 0 }}
+//                   animate={{ opacity: 1 }}
+//                   transition={{ delay: 0.6 }}
+//                 >
+//                   <motion.a
+//                     href="#"
+//                     className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all"
+//                     whileHover={{ scale: 1.05 }}
+//                     whileTap={{ scale: 0.95 }}
+//                   >
+//                     Download Resume
+//                   </motion.a>
+                  
+//                   <motion.a
+//                     href="#"
+//                     className="px-8 py-3 border-2 border-blue-500 text-blue-500 dark:text-blue-400 rounded-full font-semibold hover:bg-blue-50 dark:hover:bg-gray-800 transition-all"
+//                     whileHover={{ scale: 1.05 }}
+//                     whileTap={{ scale: 0.95 }}
+//                   >
+//                     Contact Me
+//                   </motion.a>
+//                 </motion.div>
+//               </div>
+//             </motion.section>
+//           )}
+          
+//           {/* Skills Section */}
+//           {activeSection === "skills" && (
+//             <motion.section 
+//               key="skills"
+//               initial={{ opacity: 0, y: 20 }}
+//               animate={{ opacity: 1, y: 0 }}
+//               exit={{ opacity: 0, y: -20 }}
+//               transition={{ duration: 0.5 }}
+//               className="min-h-screen py-20 px-6"
+//             >
+//               <div className="container mx-auto">
+//                 <motion.div 
+//                   className="text-center mb-16"
+//                   initial={{ opacity: 0, y: 20 }}
+//                   animate={{ opacity: 1, y: 0 }}
+//                   transition={{ delay: 0.2 }}
+//                 >
+//                   <h2 className="text-4xl md:text-5xl font-bold mb-4">Skills & Expertise</h2>
+//                   <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+//                     Technologies I've mastered and love working with
+//                   </p>
+//                 </motion.div>
+                
+//                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+//                   {[
+//                     "HTML5", "CSS3", "JavaScript", "React.js", 
+//                     "Next.js", "Tailwind", "Node.js", "Express.js", 
+//                     "MongoDB", "Python", "Git & GitHub", "C++",
+//                     "TypeScript", "GraphQL", "AWS", "TensorFlow"
+//                   ].map((skill, i) => (
+//                     <motion.div
+//                       key={skill}
+//                       className={`p-6 rounded-2xl backdrop-blur-lg shadow-lg border ${
+//                         darkMode ? 'bg-gray-800/30 border-gray-700' : 'bg-white/50 border-gray-200'
+//                       }`}
+//                       initial={{ opacity: 0, y: 30 }}
+//                       animate={{ opacity: 1, y: 0 }}
+//                       transition={{ delay: i * 0.1 }}
+//                       whileHover={{ 
+//                         y: -10,
+//                         boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+//                       }}
+//                     >
+//                       <div className="flex flex-col items-center">
+//                         <div className="w-16 h-16 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center text-white mb-4">
+//                           <span className="font-bold">{skill.charAt(0)}</span>
+//                         </div>
+//                         <h3 className="font-bold text-center">{skill}</h3>
+//                       </div>
+//                     </motion.div>
+//                   ))}
+//                 </div>
+//               </div>
+//             </motion.section>
+//           )}
+          
+//           {/* Projects Section */}
+//           {activeSection === "projects" && (
+//             <motion.section 
+//               key="projects"
+//               initial={{ opacity: 0, y: 20 }}
+//               animate={{ opacity: 1, y: 0 }}
+//               exit={{ opacity: 0, y: -20 }}
+//               transition={{ duration: 0.5 }}
+//               className="min-h-screen py-20 px-6"
+//             >
+//               <div className="container mx-auto">
+//                 <motion.div 
+//                   className="text-center mb-16"
+//                   initial={{ opacity: 0, y: 20 }}
+//                   animate={{ opacity: 1, y: 0 }}
+//                   transition={{ delay: 0.2 }}
+//                 >
+//                   <h2 className="text-4xl md:text-5xl font-bold mb-4">Featured Projects</h2>
+//                   <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+//                     A selection of my recent work and personal projects
+//                   </p>
+//                 </motion.div>
+                
+//                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+//                   {[1, 2, 3, 4, 5, 6].map((project, i) => (
+//                     <motion.div
+//                       key={i}
+//                       className={`rounded-2xl overflow-hidden shadow-xl ${
+//                         darkMode ? 'bg-gray-800' : 'bg-white'
+//                       }`}
+//                       initial={{ opacity: 0, y: 30 }}
+//                       animate={{ opacity: 1, y: 0 }}
+//                       transition={{ delay: i * 0.1 }}
+//                       whileHover={{ y: -10 }}
+//                     >
+//                       <div className="h-48 bg-gradient-to-r from-blue-400 to-purple-500 relative">
+//                         <div className="absolute inset-0 bg-gray-200 border-2 border-dashed rounded-t-2xl" />
+//                         <div className="absolute top-4 right-4 bg-white dark:bg-gray-800 px-3 py-1 rounded-full text-sm font-bold">
+//                           Project {i+1}
+//                         </div>
+//                       </div>
+//                       <div className="p-6">
+//                         <h3 className="text-xl font-bold mb-2">Project Title</h3>
+//                         <p className="text-gray-600 dark:text-gray-300 mb-4">
+//                           A brief description of the project goes here. This project showcases my skills in modern web development.
+//                         </p>
+//                         <div className="flex flex-wrap gap-2 mb-4">
+//                           {['React', 'Node.js', 'MongoDB'].map((tech, j) => (
+//                             <span 
+//                               key={j}
+//                               className="px-3 py-1 text-sm bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 rounded-full"
+//                             >
+//                               {tech}
+//                             </span>
+//                           ))}
+//                         </div>
+//                         <div className="flex justify-between">
+//                           <a 
+//                             href="#" 
+//                             className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
+//                           >
+//                             View Details →
+//                           </a>
+//                           <a 
+//                             href="#" 
+//                             className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+//                           >
+//                             GitHub
+//                           </a>
+//                         </div>
+//                       </div>
+//                     </motion.div>
+//                   ))}
+//                 </div>
+//               </div>
+//             </motion.section>
+//           )}
+          
+//           {/* About Section */}
+//           {activeSection === "about" && (
+//             <motion.section 
+//               key="about"
+//               initial={{ opacity: 0, y: 20 }}
+//               animate={{ opacity: 1, y: 0 }}
+//               exit={{ opacity: 0, y: -20 }}
+//               transition={{ duration: 0.5 }}
+//               className="min-h-screen py-20 px-6"
+//             >
+//               <div className="container mx-auto max-w-4xl">
+//                 <motion.div 
+//                   className="text-center mb-16"
+//                   initial={{ opacity: 0, y: 20 }}
+//                   animate={{ opacity: 1, y: 0 }}
+//                   transition={{ delay: 0.2 }}
+//                 >
+//                   <h2 className="text-4xl md:text-5xl font-bold mb-4">About Me</h2>
+//                   <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+//                     Learn more about my journey and experience
+//                   </p>
+//                 </motion.div>
+                
+//                 <div className="flex flex-col md:flex-row gap-12">
+//                   <div className="md:w-1/3">
+//                     <div className="bg-gradient-to-r from-blue-400 to-purple-500 p-1 rounded-2xl inline-block">
+//                       <div className="bg-white dark:bg-gray-800 rounded-2xl p-4">
+//                         <div className="bg-gray-200 border-2 border-dashed rounded-xl w-full h-64" />
+//                       </div>
+//                     </div>
+//                   </div>
+                  
+//                   <div className="md:w-2/3">
+//                     <h3 className="text-2xl font-bold mb-4">My Journey</h3>
+//                     <p className="text-gray-600 dark:text-gray-300 mb-6">
+//                       I'm a Full Stack Developer and Machine Learning enthusiast with 5 years of experience creating 
+//                       innovative web applications. My passion lies in solving complex problems with elegant solutions 
+//                       that provide exceptional user experiences.
+//                     </p>
+                    
+//                     <div className="mb-8">
+//                       <h4 className="text-xl font-bold mb-3">Experience</h4>
+//                       <div className="space-y-4">
+//                         {[
+//                           { role: "Senior Developer", company: "TechCorp", period: "2021-Present" },
+//                           { role: "Web Developer", company: "Digital Solutions", period: "2019-2021" },
+//                           { role: "Junior Developer", company: "StartUp Inc", period: "2018-2019" }
+//                         ].map((exp, i) => (
+//                           <motion.div 
+//                             key={i}
+//                             className={`p-4 rounded-xl ${
+//                               darkMode ? 'bg-gray-800' : 'bg-white'
+//                             } shadow-md`}
+//                             initial={{ opacity: 0, x: -20 }}
+//                             animate={{ opacity: 1, x: 0 }}
+//                             transition={{ delay: 0.3 + i * 0.1 }}
+//                           >
+//                             <div className="flex justify-between">
+//                               <h5 className="font-bold">{exp.role}</h5>
+//                               <span className="text-sm text-gray-500">{exp.period}</span>
+//                             </div>
+//                             <p className="text-gray-600 dark:text-gray-400">{exp.company}</p>
+//                           </motion.div>
+//                         ))}
+//                       </div>
+//                     </div>
+                    
+//                     <div>
+//                       <h4 className="text-xl font-bold mb-3">Education</h4>
+//                       <motion.div 
+//                         className={`p-4 rounded-xl ${
+//                           darkMode ? 'bg-gray-800' : 'bg-white'
+//                         } shadow-md`}
+//                         initial={{ opacity: 0, x: -20 }}
+//                         animate={{ opacity: 1, x: 0 }}
+//                         transition={{ delay: 0.6 }}
+//                       >
+//                         <h5 className="font-bold">BSc in Computer Science</h5>
+//                         <p className="text-gray-600 dark:text-gray-400">University of Technology, 2014-2018</p>
+//                       </motion.div>
+//                     </div>
+//                   </div>
+//                 </div>
+//               </div>
+//             </motion.section>
+//           )}
+          
+//           {/* Contact Section */}
+//           {activeSection === "contact" && (
+//             <motion.section 
+//               key="contact"
+//               initial={{ opacity: 0, y: 20 }}
+//               animate={{ opacity: 1, y: 0 }}
+//               exit={{ opacity: 0, y: -20 }}
+//               transition={{ duration: 0.5 }}
+//               className="min-h-screen py-20 px-6"
+//             >
+//               <div className="container mx-auto max-w-4xl">
+//                 <motion.div 
+//                   className="text-center mb-16"
+//                   initial={{ opacity: 0, y: 20 }}
+//                   animate={{ opacity: 1, y: 0 }}
+//                   transition={{ delay: 0.2 }}
+//                 >
+//                   <h2 className="text-4xl md:text-5xl font-bold mb-4">Get In Touch</h2>
+//                   <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+//                     Have a project in mind or want to collaborate? Let's connect!
+//                   </p>
+//                 </motion.div>
+                
+//                 <div className="flex flex-col md:flex-row gap-12">
+//                   <motion.div 
+//                     className="md:w-1/2"
+//                     initial={{ opacity: 0, x: -20 }}
+//                     animate={{ opacity: 1, x: 0 }}
+//                     transition={{ delay: 0.4 }}
+//                   >
+//                     <div className={`p-8 rounded-2xl shadow-lg ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
+//                       <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
+                      
+//                       <div className="space-y-6">
+//                         <div className="flex items-start">
+//                           <div className="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-full mr-4">
+//                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+//                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+//                             </svg>
+//                           </div>
+//                           <div>
+//                             <h4 className="font-bold">Email</h4>
+//                             <p className="text-gray-600 dark:text-gray-400">hello@kislayrai.com</p>
+//                           </div>
+//                         </div>
+                        
+//                         <div className="flex items-start">
+//                           <div className="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-full mr-4">
+//                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+//                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+//                             </svg>
+//                           </div>
+//                           <div>
+//                             <h4 className="font-bold">Phone</h4>
+//                             <p className="text-gray-600 dark:text-gray-400">+1 (123) 456-7890</p>
+//                           </div>
+//                         </div>
+                        
+//                         <div className="flex items-start">
+//                           <div className="bg-blue-100 dark:bg-blue-900/30 p-3 rounded-full mr-4">
+//                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+//                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+//                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+//                             </svg>
+//                           </div>
+//                           <div>
+//                             <h4 className="font-bold">Location</h4>
+//                             <p className="text-gray-600 dark:text-gray-400">San Francisco, California</p>
+//                           </div>
+//                         </div>
+//                       </div>
+                      
+//                       <div className="mt-10">
+//                         <h4 className="font-bold text-lg mb-4">Connect with me</h4>
+//                         <div className="flex space-x-4">
+//                           {['github', 'linkedin', 'twitter', 'dribbble'].map((social, i) => (
+//                             <a 
+//                               key={i}
+//                               href="#"
+//                               className="bg-gray-100 dark:bg-gray-700 p-3 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors"
+//                             >
+//                               <div className="w-6 h-6 bg-gray-300 rounded-full" />
+//                             </a>
+//                           ))}
+//                         </div>
+//                       </div>
+//                     </div>
+//                   </motion.div>
+                  
+//                   <motion.div 
+//                     className="md:w-1/2"
+//                     initial={{ opacity: 0, x: 20 }}
+//                     animate={{ opacity: 1, x: 0 }}
+//                     transition={{ delay: 0.6 }}
+//                   >
+//                     <div className={`p-8 rounded-2xl shadow-lg ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
+//                       <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
+                      
+//                       <form className="space-y-6">
+//                         <div>
+//                           <label htmlFor="name" className="block text-sm font-medium mb-2">Your Name</label>
+//                           <input 
+//                             type="text" 
+//                             id="name" 
+//                             className={`w-full p-3 rounded-lg ${
+//                               darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'
+//                             } border focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+//                             placeholder="John Doe"
+//                           />
+//                         </div>
+                        
+//                         <div>
+//                           <label htmlFor="email" className="block text-sm font-medium mb-2">Email Address</label>
+//                           <input 
+//                             type="email" 
+//                             id="email" 
+//                             className={`w-full p-3 rounded-lg ${
+//                               darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'
+//                             } border focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+//                             placeholder="john@example.com"
+//                           />
+//                         </div>
+                        
+//                         <div>
+//                           <label htmlFor="subject" className="block text-sm font-medium mb-2">Subject</label>
+//                           <input 
+//                             type="text" 
+//                             id="subject" 
+//                             className={`w-full p-3 rounded-lg ${
+//                               darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'
+//                             } border focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+//                             placeholder="Project Inquiry"
+//                           />
+//                         </div>
+                        
+//                         <div>
+//                           <label htmlFor="message" className="block text-sm font-medium mb-2">Your Message</label>
+//                           <textarea 
+//                             id="message" 
+//                             rows="5"
+//                             className={`w-full p-3 rounded-lg ${
+//                               darkMode ? 'bg-gray-700 border-gray-600' : 'bg-gray-50 border-gray-200'
+//                             } border focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+//                             placeholder="Hello, I'd like to discuss..."
+//                           ></textarea>
+//                         </div>
+                        
+//                         <motion.button
+//                           type="submit"
+//                           className="w-full py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
+//                           whileHover={{ scale: 1.02 }}
+//                           whileTap={{ scale: 0.98 }}
+//                         >
+//                           Send Message
+//                         </motion.button>
+//                       </form>
+//                     </div>
+//                   </motion.div>
+//                 </div>
+//               </div>
+//             </motion.section>
+//           )}
+//         </AnimatePresence>
+//       </main>
+
+//       {/* Footer */}
+//       <footer className={`py-12 border-t ${
+//         darkMode ? 'border-gray-800 bg-gray-900' : 'border-gray-200 bg-gradient-to-br from-blue-50 to-purple-50'
+//       }`}>
+//         <div className="container mx-auto px-6">
+//           <div className="flex flex-col md:flex-row justify-between items-center">
+//             <div className="mb-6 md:mb-0">
+//               <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
+//                 Kislay Rai
+//               </div>
+//               <p className="text-gray-600 dark:text-gray-400 mt-2">
+//                 Crafting digital experiences with passion
+//               </p>
+//             </div>
+            
+//             <div className="flex space-x-6">
+//               {['hero', 'skills', 'projects', 'about', 'contact'].map((section) => (
+//                 <a 
+//                   key={section}
+//                   href={`#${section}`}
+//                   onClick={() => setActiveSection(section)}
+//                   className="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors capitalize"
+//                 >
+//                   {section}
+//                 </a>
+//               ))}
+//             </div>
+//           </div>
+          
+//           <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800 text-center text-gray-500 dark:text-gray-400">
+//             <p>© {new Date().getFullYear()} Kislay Rai. All rights reserved.</p>
+//           </div>
+//         </div>
+//       </footer>
+//     </div>
+//   );
+// }

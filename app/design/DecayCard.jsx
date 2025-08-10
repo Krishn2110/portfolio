@@ -1,3 +1,4 @@
+
 // import { useEffect, useRef } from "react";
 // import { gsap } from "gsap";
 
@@ -17,6 +18,8 @@
 //     const lerp = (a, b, n) => (1 - n) * a + n * b;
 //     const map = (x, a, b, c, d) => ((x - a) * (d - c)) / (b - a) + c;
 //     const distance = (x1, x2, y1, y2) => Math.hypot(x1 - x2, y1 - y2);
+
+//     const isMobile = () => window.innerWidth <= 768;
 
 //     const handleResize = () => {
 //       winsize.current = { width: window.innerWidth, height: window.innerHeight };
@@ -45,11 +48,13 @@
 //         map(cursor.current.y, 0, winsize.current.height, -120, 120),
 //         0.1
 //       );
-//       let targetRz = lerp(
-//         imgValues.imgTransforms.rz,
-//         map(cursor.current.x, 0, winsize.current.width, -10, 10),
-//         0.1
-//       );
+//       let targetRz = isMobile()
+//         ? 0
+//         : lerp(
+//             imgValues.imgTransforms.rz,
+//             map(cursor.current.x, 0, winsize.current.width, -10, 10),
+//             0.1
+//           );
 
 //       const bound = 50;
 //       if (targetX > bound) targetX = bound + (targetX - bound) * 0.2;
@@ -101,7 +106,7 @@
 //   return (
 //     <div
 //       ref={svgRef}
-//       className="relative"
+//       className="relative overflow-hidden rounded-2xl" // Added overflow-hidden and rounded-2xl here
 //       style={{ width: `${width}px`, height: `${height}px` }}
 //     >
 //       <svg
@@ -109,6 +114,13 @@
 //         preserveAspectRatio="xMidYMid slice"
 //         className="relative w-full h-full block [will-change:transform]"
 //       >
+//         {/* Add clipPath for rounded corners */}
+//         <defs>
+//           <clipPath id="roundedCorners">
+//             <rect x="0" y="0" width="600" height="750" rx="32" ry="32" />
+//           </clipPath>
+//         </defs>
+        
 //         <filter id="imgFilter">
 //           <feTurbulence
 //             type="turbulence"
@@ -144,6 +156,7 @@
 //             width="600"
 //             height="750"
 //             filter="url(#imgFilter)"
+//             clipPath="url(#roundedCorners)" // Apply clipPath here
 //             preserveAspectRatio="xMidYMid slice"
 //           />
 //         </g>
@@ -159,12 +172,14 @@
 
 
 
+"use client"
+import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 
-
-
-
-import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
+// Dynamically import GSAP only on client-side
+const gsapPromise = typeof window !== "undefined" 
+  ? import("gsap").then(mod => mod.gsap) 
+  : Promise.resolve(null);
 
 const DecayCard = ({
   width = 300,
@@ -174,16 +189,37 @@ const DecayCard = ({
 }) => {
   const svgRef = useRef(null);
   const displacementMapRef = useRef(null);
-  const cursor = useRef({ x: window.innerWidth / 2, y: window.innerHeight / 2 });
-  const cachedCursor = useRef({ ...cursor.current });
-  const winsize = useRef({ width: window.innerWidth, height: window.innerHeight });
+  const cursor = useRef({ x: 0, y: 0 });
+  const cachedCursor = useRef({ x: 0, y: 0 });
+  const winsize = useRef({ width: 0, height: 0 });
+  const [isClient, setIsClient] = useState(false);
+  const [gsap, setGsap] = useState(null);
 
   useEffect(() => {
+    // Only run on client
+    setIsClient(true);
+    
+    // Initialize GSAP
+    gsapPromise.then(gsap => {
+      if (gsap) setGsap(gsap);
+    });
+
+    if (typeof window !== "undefined") {
+      cursor.current = { 
+        x: window.innerWidth / 2, 
+        y: window.innerHeight / 2 
+      };
+      cachedCursor.current = { ...cursor.current };
+      winsize.current = { 
+        width: window.innerWidth, 
+        height: window.innerHeight 
+      };
+    }
+
     const lerp = (a, b, n) => (1 - n) * a + n * b;
     const map = (x, a, b, c, d) => ((x - a) * (d - c)) / (b - a) + c;
     const distance = (x1, x2, y1, y2) => Math.hypot(x1 - x2, y1 - y2);
 
-    // Detect mobile devices (e.g., screen width <= 768px)
     const isMobile = () => window.innerWidth <= 768;
 
     const handleResize = () => {
@@ -194,16 +230,16 @@ const DecayCard = ({
       cursor.current = { x: ev.clientX, y: ev.clientY };
     };
 
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("mousemove", handleMouseMove);
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", handleResize);
+      window.addEventListener("mousemove", handleMouseMove);
+    }
 
-    const imgValues = {
-      imgTransforms: { x: 0, y: 0, rz: 0 },
-      displacementScale: 0,
-    };
+    let animationFrame;
 
     const render = () => {
-      // Skip tilt (rotateZ) on mobile devices
+      if (!svgRef.current || !displacementMapRef.current || !gsap) return;
+      
       let targetX = lerp(
         imgValues.imgTransforms.x,
         map(cursor.current.x, 0, winsize.current.width, -120, 120),
@@ -215,7 +251,7 @@ const DecayCard = ({
         0.1
       );
       let targetRz = isMobile()
-        ? 0 // No rotation on mobile
+        ? 0
         : lerp(
             imgValues.imgTransforms.rz,
             map(cursor.current.x, 0, winsize.current.width, -10, 10),
@@ -232,13 +268,11 @@ const DecayCard = ({
       imgValues.imgTransforms.y = targetY;
       imgValues.imgTransforms.rz = targetRz;
 
-      if (svgRef.current) {
-        gsap.set(svgRef.current, {
-          x: imgValues.imgTransforms.x,
-          y: imgValues.imgTransforms.y,
-          rotateZ: imgValues.imgTransforms.rz,
-        });
-      }
+      gsap.set(svgRef.current, {
+        x: imgValues.imgTransforms.x,
+        y: imgValues.imgTransforms.y,
+        rotateZ: imgValues.imgTransforms.rz,
+      });
 
       const cursorTravelledDistance = distance(
         cachedCursor.current.x,
@@ -252,27 +286,42 @@ const DecayCard = ({
         0.06
       );
 
-      if (displacementMapRef.current) {
-        gsap.set(displacementMapRef.current, { attr: { scale: imgValues.displacementScale } });
-      }
+      gsap.set(displacementMapRef.current, { attr: { scale: imgValues.displacementScale } });
 
       cachedCursor.current = { ...cursor.current };
 
-      requestAnimationFrame(render);
+      animationFrame = requestAnimationFrame(render);
+    };
+
+    const imgValues = {
+      imgTransforms: { x: 0, y: 0, rz: 0 },
+      displacementScale: 0,
     };
 
     render();
 
     return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("mousemove", handleMouseMove);
+      if (typeof window !== "undefined") {
+        window.removeEventListener("resize", handleResize);
+        window.removeEventListener("mousemove", handleMouseMove);
+      }
+      if (animationFrame) cancelAnimationFrame(animationFrame);
     };
-  }, []);
+  }, [gsap]);
+
+  if (!isClient) {
+    return (
+      <div 
+        className="relative overflow-hidden rounded-2xl bg-gray-200" 
+        style={{ width: `${width}px`, height: `${height}px` }}
+      />
+    );
+  }
 
   return (
     <div
       ref={svgRef}
-      className="relative"
+      className="relative overflow-hidden rounded-2xl"
       style={{ width: `${width}px`, height: `${height}px` }}
     >
       <svg
@@ -280,6 +329,12 @@ const DecayCard = ({
         preserveAspectRatio="xMidYMid slice"
         className="relative w-full h-full block [will-change:transform]"
       >
+        <defs>
+          <clipPath id="roundedCorners">
+            <rect x="0" y="0" width="600" height="750" rx="32" ry="32" />
+          </clipPath>
+        </defs>
+        
         <filter id="imgFilter">
           <feTurbulence
             type="turbulence"
@@ -315,6 +370,7 @@ const DecayCard = ({
             width="600"
             height="750"
             filter="url(#imgFilter)"
+            clipPath="url(#roundedCorners)"
             preserveAspectRatio="xMidYMid slice"
           />
         </g>
