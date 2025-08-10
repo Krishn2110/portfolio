@@ -1,139 +1,10 @@
-
-
-// "use client";
-
-// import React, {useState, useEffect} from "react";
-// import localFont from "next/font/local";
-// import AnimatedHeading from "./AnimatedHeading";
-// import { FaGithub } from "react-icons/fa";
-// import ChromaGrid from "../design/ChromaGrid";
-
-// // Load funnelSans font
-// const funnelSans = localFont({
-//   src: [
-//     {
-//       path: "../fonts/funnel-sans/FunnelSans-Bold.ttf",
-//       weight: "700",
-//       style: "normal",
-//     },
-//   ],
-//   variable: "--font-funnel-sans",
-//   display: "swap",
-// });
-
-// // Project items for ChromaGrid
-// const items = [
-//   {
-//     image: "/images/excel.png",
-//     title: "Excel Analytics App",
-//     subtitle: "Upload and visualize Excel data",
-//     borderColor: "#3B82F6",
-//     gradient: "linear-gradient(145deg, #3B82F6, #000)",
-//     url: "https://github.com/krushal29/ZidioFrontendInternship",
-//     tech: ["React", "Chart.js", "ExcelJS"]
-//   },
-//   {
-//     image: "/images/ecom.png",
-//     title: "E-commerce Website",
-//     subtitle: "Responsive shopping UI",
-//     borderColor: "#10B981",
-//     gradient: "linear-gradient(180deg, #10B981, #000)",
-//     url: "https://github.com/Krishn2110/twitter",
-//     tech: ["React", "Tailwind CSS", "Firebase"]
-//   },
-//   {
-//     image: "/images/pm.png",
-//     title: "Password Manager",
-//     subtitle: "Secure full-stack manager",
-//     borderColor: "#EC4899",
-//     gradient: "linear-gradient(145deg, #EC4899, #000)",
-//     url: "https://github.com/Krishn2110/Password_manager",
-//     tech: ["MongoDB", "Express", "Node.js", "React"]
-//   },
-//   {
-//     image: "/images/tb.png",
-//     title: "Travel Booking",
-//     subtitle: "Book trips with Razorpay",
-//     borderColor: "#8B5CF6",
-//     gradient: "linear-gradient(145deg, #8B5CF6, #000)",
-//     url: "https://github.com/Krishn2110/TravelBooking",
-//     tech: ["Next.js", "Tailwind", "Razorpay"]
-//   },
-//   {
-//     image: "/images/chatify.png",
-//     title: "Chatify",
-//     subtitle: "Real-time chat with Stream",
-//     borderColor: "#F59E0B",
-//     gradient: "linear-gradient(145deg, #F59E0B, #000)",
-//     url: "https://github.com/Krishn2110/Chatify",
-//     tech: ["Next.js", "Clerk", "Stream Chat"]
-//   },
-//   {
-//     image: "/images/bt.png",
-//     title: "Bitlinks",
-//     subtitle: "URL shortener & analytics",
-//     borderColor: "#EF4444",
-//     gradient: "linear-gradient(145deg, #EF4444, #000)",
-//     url: "https://github.com/Krishn2110/bitlinks",
-//     tech: ["Next.js", "MongoDB", "Tailwind"]
-//   }
-// ];
-
-// function ProjectsSection() {
-
-//   const [radius, setRadius] = useState(250);
-
-//   useEffect(() => {
-//     // Runs only on the client
-//     const updateRadius = () => {
-//       const width = window.innerWidth;
-//       setRadius(width < 640 ? 120 : 250);
-//     };
-
-//     updateRadius(); // Set on initial render
-//     window.addEventListener("resize", updateRadius); // Optional: respond to resize
-
-//     return () => window.removeEventListener("resize", updateRadius);
-//   }, []);
-
-
-  
-//   return (
-//     <section
-//       id="projects"
-//       className={`${funnelSans.className} mt-12 text-center 
-//         bg-gradient-to-br from-blue-300 via-purple-100 to-pink-300
-//         dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 
-//         py-20 px-4 sm:px-6 rounded-xl shadow-xl`}
-//     >
-//       <AnimatedHeading text="Projects" />
-
-      
-
-//       <div className="relative w-full max-w-7xl mx-auto min-h-[400px] sm:min-h-[600px] lg:min-h-[700px]">
-//         <ChromaGrid
-//           items={items}
-//           radius={radius}
-//           damping={0.45}
-//           fadeOut={0.6}
-//           ease="power3.out"
-//         />
-//       </div>
-//     </section>
-//   );
-// }
-
-// export default ProjectsSection;
-
-
-
 "use client";
 
 import React, { useState, useEffect } from "react";
 import localFont from "next/font/local";
 import { motion } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
-import Image from "next/image"; // Added Next.js Image component
+import Image from "next/image"; 
 
 // Load funnelSans font
 const funnelSans = localFont({
@@ -381,7 +252,7 @@ function ProjectsSection() {
                     {project.tech.map((tech, i) => (
                       <span 
                         key={i}
-                        className="px-2 py-1 text-xs font-medium rounded-full bg-blue-500/10 backdrop-blur-sm text-blue-700 dark:text-blue-300 border border-blue-400/20"
+                        className="px-2 py-1 text-xs font-medium rounded-full bg-blue-500/10 backdrop-blur-sm text-gray-300 dark:text-blue-300 border border-blue-400/20"
                       >
                         {tech}
                       </span>
