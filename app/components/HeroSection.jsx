@@ -201,29 +201,18 @@ useEffect(() => {
 
       {/* Decay Card with glass effect */}
       <motion.div 
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative z-10 mb-12 md:mb-0"
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-      >
-        <div className="relative overflow-hidden rounded-2xl border border-white/20 backdrop-blur-lg shadow-xl">
-          <DecayCard width={400} height={600} image="./p3.png">
-            <motion.div
-              className="absolute inset-0 flex items-end p-6"
-              animate={{
-                backdropFilter: isHovering ? "blur(4px)" : "blur(0px)",
-                backgroundColor: isHovering ? "rgba(0,0,0,0.4)" : "rgba(0,0,0,0.2)",
-              }}
-            >
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                Kislay Rai
-              </h2>
-            </motion.div>
-          </DecayCard>
-        </div>
-      </motion.div>
+  initial={{ opacity: 0, x: -50 }}
+  animate={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.8, ease: "easeOut" }}
+  className="relative z-10 mb-12 md:mb-0"
+>
+  <img 
+    src="/p3.png" 
+    alt="Kislay Rai"
+    className="w-80 h-auto object-cover rounded-xl border-4 border-white/20 shadow-xl dark:border-gray-700"
+  />
+</motion.div>
+
 
       {/* Text Content */}
       <motion.div
