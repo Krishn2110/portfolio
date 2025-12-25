@@ -31,6 +31,33 @@ const items = [
     tech: ["React", "Chart.js", "ExcelJS"]
   },
   {
+    image: "/images/km.png",
+    title: "KisanMitra",
+    subtitle: "Agricultural support platform",
+    borderColor: "#09e3df",
+    gradient: "linear-gradient(145deg, #EF4444, #000)",
+    url: "https://github.com/Krishn2110/Data-Farmers",
+    tech: ["React", "MongoDB", "Tailwind"]
+  },
+  {
+    image: "/images/ap.png",
+    title: "Appointment System",
+    subtitle: "Appointment & Queue Management System",
+    borderColor: "#63e6b3",
+    gradient: "linear-gradient(145deg, #EF4444, #000)",
+    url: "https://github.com/Krishn2110/Appointment_system",
+    tech: ["React", "MongoDB", "Tailwind,", "Capacitor"]
+  },
+  {
+    image: "/images/sac.png",
+    title: "SAC website",
+    subtitle: "Website for Student Activity Center",
+    borderColor: "#fc0808",
+    gradient: "linear-gradient(145deg, #EF4444, #000)",
+    url: "https://github.com/Krishn2110/Sac_website",
+    tech: ["Next js", "MongoDB", "Tailwind"]
+  },
+  {
     image: "/images/ecom.png",
     title: "E-commerce Website",
     subtitle: "Responsive shopping UI",
@@ -74,7 +101,8 @@ const items = [
     gradient: "linear-gradient(145deg, #EF4444, #000)",
     url: "https://github.com/Krishn2110/bitlinks",
     tech: ["Next.js", "MongoDB", "Tailwind"]
-  }
+  },
+  
 ];
 
 function ProjectsSection() {

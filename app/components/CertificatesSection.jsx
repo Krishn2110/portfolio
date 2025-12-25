@@ -84,34 +84,42 @@ export default function CertificatesSection() {
     },
     { 
       id: 2,
-      src: "/certificates/previews/HTML.png", 
-      alt: "HTML Certificate",
-      title: "HTML5 Certification",
-      issuer: "Web Development Institute",
-      date: "2022"
+      src: "/certificates/previews/Zidio1.png", 
+      alt: "Zidio Development",
+      title: "Zidio Development Internship",
+      issuer: "Zidio",
+      date: "2025"
     },
     { 
       id: 3,
-      src: "/certificates/previews/CSS.png", 
-      alt: "CSS Certificate",
-      title: "CSS3 Mastery",
-      issuer: "Frontend Masters",
+      src: "/certificates/previews/HTML.png", 
+      alt: "HTML Certificate",
+      title: "HTML5 Certification",
+      issuer: "Infosys",
       date: "2022"
     },
     { 
       id: 4,
-      src: "/certificates/previews/Javascript.png", 
-      alt: "JavaScript Certificate",
-      title: "JavaScript Specialist",
-      issuer: "JavaScript Academy",
-      date: "2023"
+      src: "/certificates/previews/CSS.png", 
+      alt: "CSS Certificate",
+      title: "CSS3 Mastery",
+      issuer: "Infosys",
+      date: "2022"
     },
     { 
       id: 5,
+      src: "/certificates/previews/Javascript.png", 
+      alt: "JavaScript Certificate",
+      title: "JavaScript Specialist",
+      issuer: "Infosys",
+      date: "2023"
+    },
+    { 
+      id: 6,
       src: "/certificates/previews/pycertificate1.png", 
       alt: "Python Certificate",
       title: "Python Programming",
-      issuer: "Python Institute",
+      issuer: "Infosys",
       date: "2023"
     },
   ];
