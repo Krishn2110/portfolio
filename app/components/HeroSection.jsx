@@ -207,9 +207,9 @@ useEffect(() => {
   className="relative z-10 mb-12 md:mb-0"
 >
   <img 
-    src="/p3.png" 
+    src="/kislay_pr.jpg" 
     alt="Kislay Rai"
-    className="w-80 h-auto object-cover rounded-xl border-4 border-white/20 shadow-xl dark:border-gray-700"
+    className="w-100 h-150 object-cover rounded-xl border-4 border-white/20 shadow-xl dark:border-gray-700"
   />
 </motion.div>
 
