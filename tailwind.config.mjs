@@ -24,6 +24,10 @@ export default {
   content: ["./app/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", "monospace"],
+        display: ["var(--font-display)", "sans-serif"],
+      },
       animation: {
         'gradient-x': 'gradient-x 5s ease infinite',
         'gradient-y': 'gradient-y 5s ease infinite',

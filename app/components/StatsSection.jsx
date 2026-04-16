@@ -1,140 +1,20 @@
-
 "use client";
 
-import React, { useState, useEffect } from "react";
-import localFont from "next/font/local";
+import React from "react";
 import { motion } from "framer-motion";
-
-const funnelSans = localFont({
-  src: [
-    {
-      path: "../fonts/funnel-sans/FunnelSans-Bold.ttf",
-      weight: "700",
-      style: "normal",
-    },
-  ],
-  variable: "--font-funnel-sans",
-  display: "swap",
-});
+import ScrambleText from "./ScrambleText";
 
 export function StatsSection() {
 const stats = [
   { value: "5+", label: "Built Projects" },
-  { value: "2", label: "Dev Journey" },
+  { value: "2", label: "Dev Journey (Yrs)" },
   { value: "3+", label: "Code Battles" },
   { value: "∞", label: "Fuel Consumed" }
 ];
 
-
-  // Bubble configurations
-  const [bubbles, setBubbles] = useState([]);
-  
-  useEffect(() => {
-    // Create bubbles for background
-    const newBubbles = Array.from({ length: 15 }).map((_, i) => ({
-      id: i,
-      size: Math.random() * 120 + 40,
-      opacity: Math.random() * 0.1 + 0.05,
-      x: `${Math.random() * 100}%`,
-      y: `${Math.random() * 100}%`,
-      blur: Math.random() * 16 + 4,
-      duration: Math.random() * 30 + 20,
-      delay: Math.random() * 10,
-      xMovement: (Math.random() - 0.5) * 100,
-      yMovement: (Math.random() - 0.5) * 80,
-    }));
-    setBubbles(newBubbles);
-  }, []);
-
   return (
-    <section className={`${funnelSans.className} relative overflow-hidden py-20 px-4 sm:px-6 mt-5 mb-5 rounded-xl 
-      bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50
-      dark:from-gray-900 dark:via-gray-800 dark:to-gray-900`}>
-
-        
-      
-      {/* Background bubbles */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        {bubbles.map((bubble) => (
-          <motion.div
-            key={bubble.id}
-            className="absolute rounded-full bg-white/20 backdrop-blur-md dark:bg-purple-500/10"
-            style={{
-              width: `${bubble.size}px`,
-              height: `${bubble.size}px`,
-              left: bubble.x,
-              top: bubble.y,
-              opacity: bubble.opacity,
-              filter: `blur(${bubble.blur}px)`,
-            }}
-            animate={{
-              x: [0, bubble.xMovement, 0],
-              y: [0, bubble.yMovement, 0],
-              opacity: [bubble.opacity * 0.7, bubble.opacity, bubble.opacity * 0.7],
-            }}
-            transition={{
-              duration: bubble.duration,
-              delay: bubble.delay,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </div>
-      
-      {/* Glowing background elements */}
-      <div className="absolute inset-0 z-0 opacity-30 dark:opacity-20">
-        <motion.div 
-          className="absolute w-[40rem] h-[40rem] rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 blur-[100px] top-[-10%] left-[-10%] dark:from-purple-500 dark:to-indigo-600"
-          animate={{
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-        <motion.div 
-          className="absolute w-[50rem] h-[50rem] rounded-full bg-gradient-to-r from-pink-400 to-rose-500 blur-[100px] bottom-[-20%] right-[-10%] dark:from-pink-600 dark:to-rose-700"
-          animate={{
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        />
-      </div>
-      
-      {/* Floating particles */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={`particle-${i}`}
-            className="absolute rounded-full bg-white/10 dark:bg-purple-400/10"
-            style={{
-              width: Math.random() * 8 + 2,
-              height: Math.random() * 8 + 2,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, (Math.random() - 0.5) * 40],
-              x: [0, (Math.random() - 0.5) * 40],
-              opacity: [0.2, 0.8, 0.2],
-            }}
-            transition={{
-              duration: Math.random() * 15 + 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </div>
-
+    <section className={`relative overflow-hidden py-24 px-4 sm:px-6 mt-12 mb-5 rounded-md bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-[inset_0_0_50px_rgba(0,0,0,0.1)] dark:shadow-[inset_0_0_50px_rgba(0,0,0,0.8)]`}>
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5" />
       <div className="relative z-10 container mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -144,42 +24,39 @@ const stats = [
           transition={{ duration: 0.8 }}
         >
           <motion.h2 
-            className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500 dark:from-purple-400 dark:to-cyan-400"
+            className="text-4xl md:text-5xl font-display font-bold mb-4 text-zinc-900 dark:text-white drop-shadow-[0_0_15px_rgba(0,0,0,0.1)] dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] uppercase tracking-wider"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            My Journey in Numbers
+            <ScrambleText text="SYS." /><span className="text-pink-600 dark:text-pink-500"><ScrambleText text="STATS" /></span>
           </motion.h2>
           <motion.p 
-            className="text-xl text-gray-700 dark:text-gray-300 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-zinc-900 dark:text-zinc-400 max-w-2xl mx-auto font-sans font-medium"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            Quantifying my passion and dedication through milestones
+            System diagnostic & diagnostic logs.
           </motion.p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
           {stats.map((stat, index) => (
             <motion.div
               key={index}
-              className="p-6 rounded-2xl backdrop-blur-lg shadow-lg border border-white/30
-                bg-white/60 dark:bg-gray-900/60
-                hover:shadow-xl hover:scale-[1.03] transition-all duration-300"
+              className="p-8 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 group hover:border-lime-500 dark:hover:border-lime-400/50 shadow-sm hover:shadow-[0_8px_30px_rgba(163,230,53,0.15)] dark:hover:shadow-none transition-all duration-300 flex flex-col justify-between relative overflow-hidden"
               initial={{ opacity: 0, y: 30, scale: 0.9 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ 
-                y: -10,
-                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
-              }}
             >
-              <div className="text-center">
+              <div className="absolute top-0 right-0 p-2 opacity-10 text-6xl font-bold font-display text-zinc-900 dark:text-white">
+                0{index + 1}
+              </div>
+              <div className="text-center flex-1 flex flex-col justify-center relative z-10">
                 <motion.div 
-                  className="text-5xl font-bold mb-3 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                  className="text-5xl md:text-6xl font-display font-bold mb-4 text-lime-600 dark:text-lime-400 group-hover:text-pink-600 dark:group-hover:text-pink-400 drop-shadow-[0_0_15px_rgba(163,230,53,0.2)] dark:drop-shadow-[0_0_15px_rgba(163,230,53,0.5)] group-hover:drop-shadow-[0_0_15px_rgba(236,72,153,0.3)] dark:group-hover:drop-shadow-[0_0_15px_rgba(236,72,153,0.5)] transition-colors"
                   initial={{ scale: 0.8 }}
                   whileInView={{ scale: 1 }}
                   transition={{ 
@@ -190,20 +67,10 @@ const stats = [
                 >
                   {stat.value}
                 </motion.div>
-                <p className="text-sm sm:text-base md:text-xl font-medium text-center text-gray-800 dark:text-gray-200 break-words leading-snug">
-  {stat.label}
-</p>
-
+                <p className="text-xs uppercase tracking-widest border-t border-zinc-200 dark:border-zinc-800 pt-4 font-bold text-center text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-300 transition-colors">
+                  {stat.label}
+                </p>
               </div>
-              
-              {/* Animated progress bar */}
-              <motion.div 
-                className="mt-4 h-1 bg-gradient-to-r from-blue-500 to-purple-500 dark:from-purple-500 dark:to-indigo-600 rounded-full"
-                initial={{ width: 0 }}
-                whileInView={{ width: "100%" }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, delay: index * 0.2 }}
-              />
             </motion.div>
           ))}
         </div>

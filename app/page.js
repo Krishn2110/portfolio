@@ -9,24 +9,25 @@ import ScrollToTopButton from "./components/ScrollToTopButton";
 import localFont from "next/font/local";
 import DarkModeToggle from "./components/DarkModeToggle";
 import { StatsSection } from "./components/StatsSection";
-
-const funnelSans = localFont({
-  src: [{ path: "fonts/funnel-sans/FunnelSans-Bold.ttf", weight: "700", style: "normal" }],
-  variable: "--font-funnel-sans",
-  display: "swap",
-});
+import GridBackground from "./components/GridBackground";
+import InitialLoader from "./components/InitialLoader";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen px-6 pt-8 pb-5 bg-gradient-to-br from-blue-200 via-purple-200 to-pink-200 dark:from-gray-900 dark:via-gray-800 dark:to-black">
+    <main className="min-h-screen relative px-6 pt-8 pb-5 z-0 bg-transparent overflow-hidden text-zinc-900 dark:text-zinc-100 font-sans">
+      <InitialLoader />
+      <GridBackground />
+      {/* Subtle global glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[600px] bg-gradient-to-b from-pink-500/10 to-transparent dark:from-pink-500/20 rounded-full blur-[120px] -z-10 pointer-events-none opacity-70" />
+      
       <Navbar />
       <DarkModeToggle />
-      <HeroSection funnelSans={funnelSans} />
-      <SkillsSection funnelSans={funnelSans} />
-      <StatsSection funnelSans={funnelSans} />
-      <ProjectsSection funnelSans={funnelSans} />
-      <CertificatesSection funnelSans={funnelSans} />
-      <ContactForm funnelSans={funnelSans} />
+      <HeroSection />
+      <SkillsSection />
+      <StatsSection />
+      <ProjectsSection />
+      <CertificatesSection />
+      <ContactForm />
       <SocialIconsSidebar />
       <ScrollToTopButton />
     </main>

@@ -1,9 +1,7 @@
-
 "use client";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon, Mail, Github, Linkedin } from "lucide-react";
-import localFont from "next/font/local";
+import { Menu, X, Mail, Github, Linkedin } from "lucide-react";
 
 const navLinks = [
   { id: "skills", label: "Skills" },
@@ -18,61 +16,16 @@ const socialLinks = [
   { id: "email", icon: <Mail size={18} />, url: "mailto:contact@example.com" },
 ];
 
-const funnelSans = localFont({
-  src: [
-    {
-      path: "../fonts/funnel-sans/FunnelSans-Bold.ttf",
-      weight: "700",
-      style: "normal",
-    },
-  ],
-  variable: "--font-funnel-sans",
-  display: "swap",
-});
-
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isDark, setIsDark] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeLink, setActiveLink] = useState(null);
   const [hasMounted, setHasMounted] = useState(false);
 
-useEffect(() => {
-  setHasMounted(true);
-}, []);
-
-
-  const handleToggle = () => setMenuOpen(!menuOpen);
-  const handleLinkClick = (id) => {
-    setMenuOpen(false);
-    setActiveLink(id);
-  };
-
-  const toggleDarkMode = () => {
-    document.documentElement.classList.toggle("dark");
-    const nowDark = document.documentElement.classList.contains("dark");
-    setIsDark(nowDark);
-    localStorage.setItem("theme", nowDark ? "dark" : "light");
-  };
-
   useEffect(() => {
-    // Set initial theme
-    const saved = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    
-    if (saved === "dark" || (!saved && prefersDark)) {
-      document.documentElement.classList.add("dark");
-      setIsDark(true);
-    } else {
-      document.documentElement.classList.remove("dark");
-      setIsDark(false);
-    }
-
-    // Handle scroll
+    setHasMounted(true);
     const handleScroll = () => {
       setScrolled(window.scrollY > 10);
-      
-      // Set active link based on scroll position
       const sections = document.querySelectorAll("section");
       let current = "";
       sections.forEach((section) => {
@@ -90,53 +43,52 @@ useEffect(() => {
 
   if (!hasMounted) return null;
 
-return (
-
+  return (
     <motion.nav
       initial={{ y: -60, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`${funnelSans.className} fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[90%] max-w-3xl px-4 py-3 rounded-full shadow-lg transition-all duration-300 ${
+      className={`fixed top-6 left-1/2 transform -translate-x-1/2 z-50 w-[95%] max-w-4xl px-4 py-3 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.05)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-all duration-500 border ${
         scrolled
-          ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl border border-white/30 dark:border-gray-700/50"
-          : "bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg"
+          ? "bg-white/70 dark:bg-zinc-950/70 backdrop-blur-2xl border-zinc-200/50 dark:border-white/10"
+          : "bg-white/40 dark:bg-zinc-900/30 backdrop-blur-md border-transparent dark:border-transparent"
       }`}
     >
-      <div className="flex items-center justify-between w-full gap-4">
+      <div className="flex items-center justify-between w-full pl-2 pr-1 md:pr-4">
         {/* Logo */}
         <motion.div 
           whileHover={{ scale: 1.05 }}
           className="flex items-center gap-3"
         >
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-[#831347] to-[#c1125f] rounded-xl blur opacity-30"></div>
-            <div className="relative w-12 h-12 rounded-full bg-gradient-to-r from-[#831347] to-[#c1125f] flex items-center justify-center text-white text-2xl font-bold">
-              KR
+          <div className="relative group cursor-pointer">
+            <div className="absolute inset-0 bg-gradient-to-r from-pink-500 to-lime-400 rounded-full blur opacity-40 group-hover:opacity-100 transition-opacity"></div>
+            <div className="relative w-10 h-10 rounded-full bg-zinc-900 dark:bg-zinc-950 flex items-center justify-center text-white text-lg font-display font-bold border border-zinc-700 dark:border-zinc-800 shadow-inner">
+              KR_
             </div>
           </div>
-      
         </motion.div>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden md:flex items-center gap-2">
           {navLinks.map((link) => (
             <motion.a
               key={link.id}
               href={`#${link.id}`}
-              onClick={() => handleLinkClick(link.id)}
-              className={`relative px-4 py-2 font-medium transition-all rounded-lg ${
+              onClick={() => {
+                setMenuOpen(false);
+                setActiveLink(link.id);
+              }}
+              className={`relative px-4 py-2 text-sm font-bold tracking-widest uppercase transition-all rounded-full ${
                 activeLink === link.id
-                  ? "text-white"
-                  : "text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                  ? "text-lime-600 dark:text-lime-400"
+                  : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
               }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
             >
               {activeLink === link.id && (
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-[#831347] to-[#c1125f] rounded-lg z-[-1]"
+                  className="absolute inset-0 bg-lime-500/10 dark:bg-lime-400/10 rounded-full z-[-1] border border-lime-500/20 dark:border-lime-400/30"
                   layoutId="activeLink"
-                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  transition={{ type: "spring", stiffness: 350, damping: 30 }}
                 />
               )}
               {link.label}
@@ -144,81 +96,56 @@ return (
           ))}
         </div>
 
-        {/* Right Side: Social Icons, Theme Toggle & Menu Icon */}
-        <div className="flex items-center gap-3">
-          {/* Social Icons */}
-         
-
-          {/* Theme Toggle */}
+        {/* Right Side */}
+        <div className="flex items-center gap-3 md:hidden">
           <motion.button
-            whileTap={{ rotate: 360, scale: 0.8 }}
-            onClick={toggleDarkMode}
-            className="rounded-full p-2 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r from-[#831347] to-[#c1125f] hover:text-white transition"
-            aria-label="Toggle Theme"
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="p-2.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 hover:border-pink-500/50"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={isDark ? "moon" : "sun"}
-                initial={{ y: -10, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: 10, opacity: 0 }}
-                transition={{ duration: 0.3 }}
-              >
-                {isDark ? <Sun size={20} /> : <Moon size={20} />}
-              </motion.div>
-            </AnimatePresence>
+            {menuOpen ? <X size={20} /> : <Menu size={20} />}
           </motion.button>
-
-          {/* Mobile Toggle */}
-          <div className="md:hidden">
-            <motion.button
-              onClick={handleToggle}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r from-[#831347] to-[#c1125f] hover:text-white"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {menuOpen ? <X size={24} /> : <Menu size={24} />}
-            </motion.button>
-          </div>
         </div>
       </div>
 
-      {/* Mobile Nav Dropdown */}
+      {/* Mobile Nav */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-  initial={{ opacity: 0, y: -10 }}
-  animate={{ opacity: 1, y: 0 }}
-  exit={{ opacity: 0, y: -10 }}
-  transition={{ duration: 0.3, ease: "easeInOut" }}
-  className="md:hidden absolute top-full left-0 w-full mt-2 z-40 rounded-xl bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border border-white/30 dark:border-gray-700/50 shadow-xl overflow-hidden"
->
-
-            <div className="py-4">
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -10, scale: 0.95 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="md:hidden absolute top-[110%] left-0 w-full mt-2 z-40 rounded-2xl bg-white/90 dark:bg-zinc-950/90 backdrop-blur-2xl border border-zinc-200/50 dark:border-white/10 shadow-2xl overflow-hidden p-3"
+          >
+            <div className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <motion.a
                   key={link.id}
                   href={`#${link.id}`}
-                  onClick={() => handleLinkClick(link.id)}
-                  className={`block py-3 px-6 text-lg font-medium transition ${
+                  onClick={() => {
+                    setMenuOpen(false);
+                    setActiveLink(link.id);
+                  }}
+                  className={`block py-3 px-4 rounded-xl text-sm font-bold tracking-wide uppercase transition ${
                     activeLink === link.id
-                      ? "bg-gradient-to-r from-[#831347]/10 to-[#c1125f]/10 text-[#c1125f] dark:text-[#ff4d8d]"
-                      : "text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
+                      ? "bg-lime-500/10 dark:bg-lime-400/10 text-lime-600 dark:text-lime-400 border border-lime-500/20 dark:border-lime-400/30"
+                      : "text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-900 border border-transparent"
                   }`}
-                  whileHover={{ x: 10 }}
+                  whileHover={{ x: 4 }}
                 >
                   {link.label}
                 </motion.a>
               ))}
-              
-              <div className="flex justify-center gap-4 pt-3 mt-2 border-t border-gray-200 dark:border-gray-700">
+              <div className="flex justify-center gap-4 pt-4 mt-2 border-t border-zinc-800">
                 {socialLinks.map((link) => (
                   <motion.a
                     key={link.id}
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-3 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:text-white hover:bg-gradient-to-r from-[#831347] to-[#c1125f]"
+                    className="p-3 rounded-full bg-zinc-100 dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400 hover:text-pink-600 dark:hover:text-pink-500 border border-zinc-200 dark:border-zinc-800 hover:border-pink-500/50 transition"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                   >

@@ -32,22 +32,23 @@
 
 
 import "./globals.css";
-import localFont from "next/font/local";
+import { Space_Grotesk, JetBrains_Mono, Inter } from "next/font/google";
 
-const funnelSans = localFont({
-  src: [
-    // {
-    //   path: "fonts/funnel-sans/FunnelSans-Regular.ttf",
-    //   weight: "400",
-    //   style: "normal",
-    // },
-    {
-      path: "fonts/funnel-sans/FunnelSans-Medium.ttf",
-      weight: "700",
-      style: "normal",
-    },
-  ],
-  variable: "--font-funnel-sans",
+const displayFont = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const sansFont = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const monoFont = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
   display: "swap",
 });
 
@@ -63,8 +64,9 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en" className={theme === "dark" ? "dark" : ""}>
-      <body className={`${funnelSans.variable} font-sans antialiased`}>
-        {children}
+      <body
+        className={`${sansFont.variable} ${displayFont.variable} ${monoFont.variable} font-sans antialiased bg-slate-100 dark:bg-[#0a0a0a] text-zinc-900 dark:text-zinc-300 min-h-screen selection:bg-pink-500/30 selection:text-pink-200 transition-colors duration-300`}
+      >  {children}
       </body>
     </html>
   );

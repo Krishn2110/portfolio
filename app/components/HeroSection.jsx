@@ -1,46 +1,12 @@
 "use client"
 
-import localFont from "next/font/local";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import TextType from '../design/TextType';
-import DecayCard from '../design/DecayCard';
-
-const funnelSans = localFont({
-  src: [
-    {
-      path: "../fonts/funnel-sans/FunnelSans-Bold.ttf",
-      weight: "700",
-      style: "normal",
-    },
-  ],
-  variable: "--font-funnel-sans",
-  display: "swap",
-});
 
 export default function HeroSection() {
   const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 });
-  const [isHovering, setIsHovering] = useState(false);
   const [hoveredElement, setHoveredElement] = useState(null);
-  const [particles, setParticles] = useState([]);
-
-  useEffect(() => {
-  const newParticles = Array.from({ length: 20 }).map((_, i) => ({
-    id: `particle-${i}`,
-    width: Math.random() * 8 + 2,
-    height: Math.random() * 8 + 2,
-    top: `${Math.random() * 100}%`,
-    left: `${Math.random() * 100}%`,
-    yMovement: (Math.random() - 0.5) * 40,
-    xMovement: (Math.random() - 0.5) * 40,
-    opacityRange: [0.2, 0.8, 0.2],
-    duration: Math.random() * 15 + 10,
-  }));
-
-  setParticles(newParticles);
-}, []);
-
-
 
   useEffect(() => {
     const move = (e) => {
@@ -50,109 +16,16 @@ export default function HeroSection() {
     return () => window.removeEventListener("mousemove", move);
   }, []);
 
-  // Bubble configurations with different properties
-  // const bubbles = Array.from({ length: 15 }).map((_, i) => ({
-  //   id: i,
-  //   size: Math.random() * 120 + 40,
-  //   opacity: Math.random() * 0.1 + 0.05,
-  //   x: `${Math.random() * 100}%`,
-  //   y: `${Math.random() * 100}%`,
-  //   blur: Math.random() * 16 + 4,
-  //   duration: Math.random() * 30 + 20,
-  //   delay: Math.random() * 10,
-  //   xMovement: (Math.random() - 0.5) * 100,
-  //   yMovement: (Math.random() - 0.5) * 80,
-  // }));
-
-  const [bubbles, setBubbles] = useState([]);
-
-useEffect(() => {
-  const generateBubbles = () =>
-    Array.from({ length: 15 }).map((_, i) => ({
-      id: i,
-      size: Math.random() * 120 + 40,
-      opacity: Math.random() * 0.1 + 0.05,
-      x: `${Math.random() * 100}%`,
-      y: `${Math.random() * 100}%`,
-      blur: Math.random() * 16 + 4,
-      duration: Math.random() * 30 + 20,
-      delay: Math.random() * 10,
-      xMovement: (Math.random() - 0.5) * 100,
-      yMovement: (Math.random() - 0.5) * 80,
-    }));
-
-  setBubbles(generateBubbles());
-}, []);
-
-
-  // Tech stack floating tags
-  const techStack = ["React", "Next.js", "Node", "Python", "TensorFlow"];
-
   return (
-    <section className={`${funnelSans.className} relative overflow-hidden min-h-screen flex flex-col-reverse md:flex-row items-center justify-around px-6 md:px-20 mt-5 mb-5 rounded-xl py-20 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-gray-800 dark:to-black`}>
+    <section className="relative overflow-hidden min-h-[90vh] flex flex-col-reverse md:flex-row items-center justify-around px-6 md:px-20 mt-12 mb-5 rounded-3xl py-20 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-3xl border border-zinc-200 dark:border-zinc-800 shadow-2xl">
       
-      {/* Transparent moving bubbles */}
-      {/* <div className="absolute inset-0 z-0 overflow-hidden">
-        {bubbles.map((bubble) => (
-          <motion.div
-            key={bubble.id}
-            className="absolute rounded-full bg-white/20 backdrop-blur-md dark:bg-purple-500/10"
-            style={{
-              width: `${bubble.size}px`,
-              height: `${bubble.size}px`,
-              left: bubble.x,
-              top: bubble.y,
-              opacity: bubble.opacity,
-              filter: `blur(${bubble.blur}px)`,
-            }}
-            animate={{
-              x: [0, bubble.xMovement, 0],
-              y: [0, bubble.yMovement, 0],
-              opacity: [bubble.opacity * 0.7, bubble.opacity, bubble.opacity * 0.7],
-            }}
-            transition={{
-              duration: bubble.duration,
-              delay: bubble.delay,
-              repeat: Infinity,
-              repeatType: "reverse",
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </div> */}
-
-      <div className="absolute inset-0 z-0 overflow-hidden">
-  {particles.map((particle) => (
-    <motion.div
-      key={particle.id}
-      className="absolute rounded-full bg-white/10 dark:bg-purple-400/10"
-      style={{
-        width: particle.width,
-        height: particle.height,
-        top: particle.top,
-        left: particle.left,
-      }}
-      animate={{
-        y: [0, particle.yMovement],
-        x: [0, particle.xMovement],
-        opacity: particle.opacityRange,
-      }}
-      transition={{
-        duration: particle.duration,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-    />
-  ))}
-</div>
-
-
-      {/* Glowing background elements */}
-      <div className="absolute inset-0 z-0 opacity-30 dark:opacity-20">
+      {/* Glowing background elements (Neon Cyber) */}
+      <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
         <motion.div 
-          className="absolute w-[40rem] h-[40rem] rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 blur-[100px] top-[-10%] left-[-10%] dark:from-purple-500 dark:to-indigo-600"
+          className="absolute w-[30rem] h-[30rem] rounded-full bg-gradient-to-r from-pink-500 to-fuchsia-600 blur-[130px] top-[-10%] left-[-10%]"
           animate={{
-            scale: [1, 1.1, 1],
+            scale: [1, 1.05, 1],
+            opacity: [0.3, 0.6, 0.3]
           }}
           transition={{
             duration: 8,
@@ -161,9 +34,10 @@ useEffect(() => {
           }}
         />
         <motion.div 
-          className="absolute w-[50rem] h-[50rem] rounded-full bg-gradient-to-r from-pink-400 to-rose-500 blur-[100px] bottom-[-20%] right-[-10%] dark:from-pink-600 dark:to-rose-700"
+          className="absolute w-[25rem] h-[25rem] rounded-full bg-gradient-to-r from-lime-400 to-green-500 blur-[120px] bottom-[-10%] right-[-10%]"
           animate={{
             scale: [1, 1.1, 1],
+            opacity: [0.2, 0.5, 0.2]
           }}
           transition={{
             duration: 10,
@@ -173,148 +47,98 @@ useEffect(() => {
         />
       </div>
 
-      {/* Floating micro-interactions */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={`particle-${i}`}
-            className="absolute rounded-full bg-white/10 dark:bg-purple-400/10"
-            style={{
-              width: Math.random() * 8 + 2,
-              height: Math.random() * 8 + 2,
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, (Math.random() - 0.5) * 40],
-              x: [0, (Math.random() - 0.5) * 40],
-              opacity: [0.2, 0.8, 0.2],
-            }}
-            transition={{
-              duration: Math.random() * 15 + 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Decay Card with glass effect */}
+      {/* Profile Image with neon grid/glow */}
       <motion.div 
-  initial={{ opacity: 0, x: -50 }}
-  animate={{ opacity: 1, x: 0 }}
-  transition={{ duration: 0.8, ease: "easeOut" }}
-  className="relative z-10 mb-12 md:mb-0"
->
-  <img 
-    src="/kislay_pr.jpg" 
-    alt="Kislay Rai"
-    className="w-100 h-150 object-cover rounded-xl border-4 border-white/20 shadow-xl dark:border-gray-700"
-  />
-</motion.div>
-
+        initial={{ opacity: 0, x: -30, filter: "blur(10px)" }}
+        animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        className="relative z-10 mb-12 md:mb-0 group w-full md:w-auto flex justify-center"
+      >
+        <motion.div 
+          animate={{ y: [0, -10, 0] }} 
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          className="relative"
+        >
+          <div className="absolute inset-0 bg-gradient-to-tr from-pink-500 dark:from-pink-500 to-lime-400 dark:to-lime-400 rounded-2xl blur-xl opacity-20 dark:opacity-30 group-hover:opacity-40 dark:group-hover:opacity-60 transition-opacity duration-500"></div>
+          <img 
+            src="/kislay_pr.jpg" 
+            alt="Kislay Rai"
+            className="relative w-72 h-[24rem] md:w-96 md:h-[30rem] object-cover rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-[0_20px_40px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_40px_rgba(236,72,153,0.15)] transition-transform duration-500 group-hover:scale-[1.02]"
+          />
+        </motion.div>
+      </motion.div>
 
       {/* Text Content */}
       <motion.div
-        initial={{ opacity: 0, x: 50 }}
+        initial={{ opacity: 0, x: 30 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, ease: "easeOut" }}
         className="relative z-10 w-full md:w-1/2 space-y-8"
       >
-        <div className="space-y-6">
+        <div className="space-y-4">
           <TextType
             text={[
               "Hello! I'm Kislay Rai.",
-              "A Full-Stack Developer & ML Enthusiast.",
-              "Crafting immersive web experiences with modern tools & elegant design."
+              "A Full-Stack Developer",
+              "& ML Enthusiast."
             ]}
             as="h1"
-            className="text-3xl md:text-5xl font-extrabold leading-tight bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
-            typingSpeed={75}
+            className="text-4xl md:text-6xl font-display font-bold leading-tight text-zinc-900 dark:text-transparent dark:bg-gradient-to-r dark:from-white dark:via-pink-400 dark:to-white dark:bg-clip-text"
+            typingSpeed={60}
             pauseDuration={1500}
             showCursor={true}
-            cursorCharacter="|"
-            cursorClassName="bg-blue-400 dark:bg-purple-400"
+            cursorCharacter="_"
+            cursorClassName="bg-lime-500 dark:bg-lime-400"
           />
           <motion.p
-            className="text-xl text-gray-700 dark:text-gray-300 max-w-2xl"
+            className="text-lg md:text-xl text-zinc-900 dark:text-zinc-400 max-w-lg font-sans leading-relaxed tracking-wide font-medium"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2 }}
           >
-            Creating innovative solutions with cutting-edge technologies
+            Crafting immersive web experiences with modern tools & elegant design. Delivering high-impact code.
           </motion.p>
         </div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.4, duration: 0.8 }}
           className="flex flex-wrap gap-4 mt-8"
         >
           <motion.a
-            href="/resumee.pdf"
+            href="/KR_resume.pdf"
             download
-            className="relative overflow-hidden inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold px-8 py-4 rounded-full group"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
+            className="relative overflow-hidden inline-flex items-center justify-center bg-pink-600 dark:bg-pink-500 text-white font-bold px-8 py-4 rounded-md shadow-[0_4px_15px_rgba(219,39,119,0.3)] dark:shadow-[0_0_15px_rgba(236,72,153,0.5)] hover:shadow-[0_8px_25px_rgba(219,39,119,0.5)] dark:hover:shadow-[0_0_25px_rgba(236,72,153,0.8)] border border-transparent transition-all tracking-wider uppercase text-sm"
+            whileHover={{ scale: 1.02, y: -2 }}
+            whileTap={{ scale: 0.98 }}
             onHoverStart={() => setHoveredElement('resume')}
             onHoverEnd={() => setHoveredElement(null)}
           >
-            <span className="relative z-10">Download Resume</span>
-            <motion.span 
-              className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"
-              initial={{ opacity: 0 }}
-            />
+            Download Resume
           </motion.a>
           
           <motion.a
             href="#contact"
-            className="relative overflow-hidden inline-block border-2 border-blue-400/50 text-blue-600 dark:text-blue-300 font-semibold px-8 py-4 rounded-full group"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
+            className="relative overflow-hidden inline-flex items-center justify-center bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-300 dark:border-lime-400/50 text-zinc-900 dark:text-lime-400 font-bold px-8 py-4 rounded-md hover:bg-zinc-900 dark:hover:bg-lime-400 hover:text-white dark:hover:text-zinc-900 hover:shadow-[0_8px_20px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_0_20px_rgba(163,230,53,0.5)] transition-all tracking-wider uppercase text-sm"
+            whileHover={{ scale: 1.02, y: -2 }}
+            whileTap={{ scale: 0.98 }}
             onHoverStart={() => setHoveredElement('contact')}
             onHoverEnd={() => setHoveredElement(null)}
           >
-            <span className="relative z-10">Contact Me</span>
-            <motion.span 
-              className="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-full"
-              initial={{ opacity: 0 }}
-            />
+            Contact Me
           </motion.a>
         </motion.div>
-
-        {/* Tech stack indicators */}
-        
       </motion.div>
 
       {/* Interactive cursor follower */}
       <motion.div
-        className="pointer-events-none absolute w-40 h-40 rounded-full bg-gradient-to-r from-blue-400/20 to-purple-400/20 blur-xl z-0 mix-blend-screen"
+        className="pointer-events-none fixed w-64 h-64 rounded-full bg-pink-500/10 dark:bg-pink-500/10 blur-3xl z-0 mix-blend-screen transition-transform duration-75 ease-out"
         style={{
-          top: cursorPos.y - 80,
-          left: cursorPos.x - 80,
+          top: cursorPos.y - 128,
+          left: cursorPos.x - 128,
         }}
-        animate={{ 
-          scale: [1, 1.2, 1],
-          opacity: [0.8, 1, 0.8]
-        }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
       />
-
-      {/* Floating skill indicator */}
-      {hoveredElement && (
-        <motion.div
-          className="fixed top-4 right-4 bg-white dark:bg-gray-800 shadow-xl rounded-xl px-4 py-2 z-20"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-        >
-          <span className="font-bold bg-gradient-to-r from-blue-500 to-purple-500 dark:from-purple-400 dark:to-cyan-400 bg-clip-text text-transparent">
-            {hoveredElement === 'resume' ? "Download my resume" : "Get in touch"}
-          </span>
-        </motion.div>
-      )}
     </section>
   );
 }

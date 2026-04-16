@@ -17,12 +17,13 @@ export default function DarkModeToggle() {
     setDarkMode(isDark);
   };
 
-//   return (
-//     <button
-//       onClick={toggleDarkMode}
-//       className="fixed top-5 right-5 z-50 px-4 py-2 bg-gray-200 dark:bg-gray-800 text-black dark:text-white rounded-lg shadow-md hover:scale-105 transition"
-//     >
-//       {darkMode ? "☀️ Light" : "🌙 Dark"}
-//     </button>
-//   );
+  return (
+    <button
+      onClick={toggleDarkMode}
+      className="fixed top-5 right-5 z-50 p-3 bg-white dark:bg-zinc-800 text-black dark:text-white rounded-full shadow-lg hover:scale-110 active:scale-95 transition-all outline-none border border-zinc-200 dark:border-zinc-700 focus:ring-2 focus:ring-pink-500"
+      aria-label="Toggle Dark Mode"
+    >
+      {darkMode ? "☀️" : "🌙"}
+    </button>
+  );
 }
