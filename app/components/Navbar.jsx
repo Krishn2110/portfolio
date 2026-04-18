@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Mail, Github, Linkedin } from "lucide-react";
+import DarkModeToggle from "./DarkModeToggle";
 
 const navLinks = [
   { id: "skills", label: "Skills" },
@@ -97,10 +98,11 @@ export default function Navbar() {
         </div>
 
         {/* Right Side */}
-        <div className="flex items-center gap-3 md:hidden">
+        <div className="flex items-center gap-2 md:hidden">
+          <DarkModeToggle className="p-2 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 hover:border-pink-500/50 outline-none text-sm w-[38px] h-[38px] flex items-center justify-center transition-all" />
           <motion.button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="p-2.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 hover:border-pink-500/50"
+            className="p-2 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 hover:border-pink-500/50 outline-none w-[38px] h-[38px] flex items-center justify-center transition-all"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

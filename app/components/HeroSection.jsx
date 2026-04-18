@@ -17,7 +17,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden min-h-[90vh] flex flex-col-reverse md:flex-row items-center justify-around px-6 md:px-20 mt-12 mb-5 rounded-3xl py-20 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-3xl border border-zinc-200 dark:border-zinc-800 shadow-2xl">
+    <section className="relative overflow-hidden min-h-[90vh] flex flex-col md:flex-row items-center justify-center gap-12 md:gap-0 md:justify-around px-4 sm:px-6 md:px-20 mt-24 md:mt-12 mb-5 rounded-3xl py-12 md:py-20 bg-white/60 dark:bg-zinc-900/60 backdrop-blur-3xl border border-zinc-200 dark:border-zinc-800 shadow-2xl">
       
       {/* Glowing background elements (Neon Cyber) */}
       <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
@@ -63,7 +63,7 @@ export default function HeroSection() {
           <img 
             src="/kislay_pr.jpg" 
             alt="Kislay Rai"
-            className="relative w-72 h-[24rem] md:w-96 md:h-[30rem] object-cover rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-[0_20px_40px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_40px_rgba(236,72,153,0.15)] transition-transform duration-500 group-hover:scale-[1.02]"
+            className="relative w-64 h-[20rem] sm:w-72 sm:h-[24rem] md:w-96 md:h-[30rem] object-cover rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-[0_20px_40px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_40px_rgba(236,72,153,0.15)] transition-transform duration-500 group-hover:scale-[1.02]"
           />
         </motion.div>
       </motion.div>
@@ -83,7 +83,7 @@ export default function HeroSection() {
               "& ML Enthusiast."
             ]}
             as="h1"
-            className="text-4xl md:text-6xl font-display font-bold leading-tight text-zinc-900 dark:text-transparent dark:bg-gradient-to-r dark:from-white dark:via-pink-400 dark:to-white dark:bg-clip-text"
+            className="text-3xl sm:text-4xl md:text-6xl font-display font-bold leading-tight text-zinc-900 dark:text-transparent dark:bg-gradient-to-r dark:from-white dark:via-pink-400 dark:to-white dark:bg-clip-text"
             typingSpeed={60}
             pauseDuration={1500}
             showCursor={true}
@@ -91,7 +91,7 @@ export default function HeroSection() {
             cursorClassName="bg-lime-500 dark:bg-lime-400"
           />
           <motion.p
-            className="text-lg md:text-xl text-zinc-900 dark:text-zinc-400 max-w-lg font-sans leading-relaxed tracking-wide font-medium"
+            className="text-base sm:text-lg md:text-xl text-zinc-900 dark:text-zinc-400 max-w-lg font-sans leading-relaxed tracking-wide font-medium"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2 }}
@@ -133,7 +133,7 @@ export default function HeroSection() {
 
       {/* Interactive cursor follower */}
       <motion.div
-        className="pointer-events-none fixed w-64 h-64 rounded-full bg-pink-500/10 dark:bg-pink-500/10 blur-3xl z-0 mix-blend-screen transition-transform duration-75 ease-out"
+        className="pointer-events-none fixed w-64 h-64 rounded-full bg-pink-500/10 dark:bg-pink-500/10 blur-3xl z-0 mix-blend-screen transition-transform duration-75 ease-out hidden md:block"
         style={{
           top: cursorPos.y - 128,
           left: cursorPos.x - 128,
