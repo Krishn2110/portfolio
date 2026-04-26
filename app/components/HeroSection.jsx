@@ -107,7 +107,7 @@ export default function HeroSection() {
           className="flex flex-wrap gap-4 mt-8"
         >
           <motion.a
-            href="/KR_resume.pdf"
+            href="/Kislay_cv.pdf"
             download
             className="relative overflow-hidden inline-flex items-center justify-center bg-pink-600 dark:bg-pink-500 text-white font-bold px-8 py-4 rounded-md shadow-[0_4px_15px_rgba(219,39,119,0.3)] dark:shadow-[0_0_15px_rgba(236,72,153,0.5)] hover:shadow-[0_8px_25px_rgba(219,39,119,0.5)] dark:hover:shadow-[0_0_25px_rgba(236,72,153,0.8)] border border-transparent transition-all tracking-wider uppercase text-sm"
             whileHover={{ scale: 1.02, y: -2 }}
