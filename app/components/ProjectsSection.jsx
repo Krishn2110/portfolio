@@ -23,6 +23,20 @@ const items = [
     tech: ["React", "MongoDB", "Tailwind"]
   },
   {
+  image: "/images/potato-disease.png",
+  title: "Potato Disease Detection System",
+subtitle: "AI-powered web and mobile application for detecting potato leaf diseases using Deep Learning",
+url: "https://github.com/Krishn2110/potato-disease-detection",
+tech: [
+  "React",
+  "React Native",
+  "FastAPI",
+  "TensorFlow",
+  "Railway",
+  "Vercel"
+]
+  },
+  {
     image: "/images/ap.png",
     title: "Appointment System",
     subtitle: "Appointment & Queue Management System",
