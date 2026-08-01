@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import ScrambleText from "./ScrambleText";
 import SpotlightCard from "./SpotlightCard";
+import PixelDriftHeading from "./PixelDriftHeading";
 
 export default function CertificatesSection() {
   const certificates = [
@@ -84,14 +84,17 @@ export default function CertificatesSection() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
         >
-          <motion.h2 
-            className="text-4xl md:text-5xl font-display font-bold mb-4 text-zinc-900 dark:text-white drop-shadow-[0_0_15px_rgba(0,0,0,0.1)] dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] uppercase tracking-wider"
+          <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            <ScrambleText text="SYS." /><span className="text-lime-600 dark:text-lime-500"><ScrambleText text="CERTIFICATES" /></span>
-          </motion.h2>
+            <PixelDriftHeading
+              label="SYS.CERTIFICATES"
+              colors={["#FFFFFF", "#A3E635", "#EC4899"]}
+              lightColors={["#18181B", "#65A30D", "#DB2777"]}
+            />
+          </motion.div>
           <motion.p 
             className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto font-sans"
             initial={{ opacity: 0 }}

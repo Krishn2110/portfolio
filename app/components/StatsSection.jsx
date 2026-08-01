@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import ScrambleText from "./ScrambleText";
+import PixelDriftHeading from "./PixelDriftHeading";
 
 export function StatsSection() {
 const stats = [
@@ -23,14 +23,17 @@ const stats = [
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
         >
-          <motion.h2 
-            className="text-4xl md:text-5xl font-display font-bold mb-4 text-zinc-900 dark:text-white drop-shadow-[0_0_15px_rgba(0,0,0,0.1)] dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] uppercase tracking-wider"
+          <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            <ScrambleText text="SYS." /><span className="text-pink-600 dark:text-pink-500"><ScrambleText text="STATS" /></span>
-          </motion.h2>
+            <PixelDriftHeading
+              label="SYS.STATS"
+              colors={["#FFFFFF", "#EC4899", "#A3E635"]}
+              lightColors={["#18181B", "#DB2777", "#65A30D"]}
+            />
+          </motion.div>
           <motion.p 
             className="text-lg md:text-xl text-zinc-900 dark:text-zinc-400 max-w-2xl mx-auto font-sans font-medium"
             initial={{ opacity: 0 }}

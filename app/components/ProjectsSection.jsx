@@ -4,8 +4,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FaGithub } from "react-icons/fa";
 import Image from "next/image"; 
-import ScrambleText from "./ScrambleText";
 import SpotlightCard from "./SpotlightCard";
+import PixelDriftHeading from "./PixelDriftHeading";
 
 const items = [
   {
@@ -102,14 +102,17 @@ export default function ProjectsSection() {
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8 }}
         >
-          <motion.h2 
-            className="text-4xl md:text-5xl font-display font-bold mb-4 text-zinc-900 dark:text-white drop-shadow-[0_0_15px_rgba(0,0,0,0.1)] dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] uppercase tracking-wider"
+          <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
           >
-            <ScrambleText text="SYS." /><span className="text-lime-600 dark:text-lime-400"><ScrambleText text="PROJECTS" /></span>
-          </motion.h2>
+            <PixelDriftHeading
+              label="SYS.PROJECTS"
+              colors={["#FFFFFF", "#84CC16", "#F472B6"]}
+              lightColors={["#18181B", "#65A30D", "#DB2777"]}
+            />
+          </motion.div>
           <motion.p 
             className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto font-sans"
             initial={{ opacity: 0 }}

@@ -3,8 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import Magnet from "../design/Magnet";
-import ScrambleText from "./ScrambleText";
 import SpotlightCard from "./SpotlightCard";
+import PixelDriftHeading from "./PixelDriftHeading";
 import { 
   FaHtml5, FaCss3Alt, FaJs, FaReact, FaNodeJs, FaGitAlt,
   FaPython, FaCode, FaServer, FaTools, FaBolt, FaDatabase, FaEye, FaRobot
@@ -99,14 +99,17 @@ export default function SkillsSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <motion.h2 
-            className="text-4xl md:text-5xl font-display font-bold mb-4 text-zinc-900 dark:text-white drop-shadow-[0_0_15px_rgba(0,0,0,0.1)] dark:drop-shadow-[0_0_15px_rgba(255,255,255,0.3)] uppercase tracking-wider"
+          <motion.div 
             initial={{ opacity: 0 }}
             animate={isVisible ? { opacity: 1 } : {}}
             transition={{ delay: 0.3 }}
           >
-            <ScrambleText text="SYS." /><span className="text-pink-600 dark:text-pink-500"><ScrambleText text="SKILLS" /></span>
-          </motion.h2>
+            <PixelDriftHeading
+              label="SYS.SKILLS"
+              colors={["#FFFFFF", "#EC4899", "#A3E635"]}
+              lightColors={["#18181B", "#DB2777", "#65A30D"]}
+            />
+          </motion.div>
           <motion.p 
             className="text-lg md:text-xl text-zinc-900 dark:text-zinc-400 max-w-2xl mx-auto font-sans font-medium"
             initial={{ opacity: 0 }}
